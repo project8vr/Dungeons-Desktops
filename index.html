@@ -2,699 +2,268 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>D&D Beyond Character Sheet (Editable)</title>
-  <meta name="viewport" content="width=1200">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Crimson+Text:700,400" rel="stylesheet">
+  <title>D&D 5e Editable Character Sheet - 3 Pages</title>
+  <meta name="viewport" content="width=1024">
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      background: #f3f6fa;
-    }
     body {
-      min-height: 100vh;
-      width: 100vw;
-      box-sizing: border-box;
-      padding: 0;
       margin: 0;
-      font-family: "Roboto", Arial, sans-serif;
-      color: #232336;
+      background: #232325;
+      font-family: 'Segoe UI', Arial, sans-serif;
     }
-    .sheet-main {
-      max-width: 1100px;
-      min-height: 95vh;
-      margin: 20px auto;
-      background: #fff;
-      border: 2.5px solid #222;
-      border-radius: 13px;
-      box-shadow: 0 2px 32px #0002;
+    .sheet-wrapper {
       display: flex;
       flex-direction: column;
-      padding: 0;
-    }
-    .sheet-header {
-      display: flex;
-      align-items: flex-end;
-      border-bottom: 2px solid #222;
-      padding: 18px 32px 0 32px;
-      background: #f7faff;
-      gap: 18px;
-    }
-    .logo {
-      height: 48px;
-    }
-    .header-block {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      gap: 9px;
-    }
-    .sheet-title {
-      font-family: "Crimson Text", serif;
-      font-size: 2.1em;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-    }
-    .sheet-subtitle {
-      font-size: 1.05em;
-      font-family: "Crimson Text", serif;
-      font-weight: 400;
-      margin-left: 7px;
-      letter-spacing: 1px;
-    }
-    .charname-row {
-      display: flex;
       align-items: center;
-      margin-top: 3px;
-      margin-bottom: 5px;
-      gap: 12px;
+      padding: 32px 0 32px 0;
     }
-    .charname-label {
-      font-family: "Roboto", Arial, sans-serif;
-      font-weight: 900;
-      font-size: 1.07em;
-      letter-spacing: 1.1px;
-      margin-right: 3px;
-    }
-    .charname-input {
-      font-family: "Crimson Text", serif;
-      font-size: 1.3em;
-      font-weight: 700;
-      border: none;
-      border-bottom: 2px solid #222;
-      background: transparent;
-      outline: none;
-      padding: 2px 4px;
-      width: 290px;
-    }
-    .header-fields {
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-      gap: 10px;
-      font-size: 1em;
-    }
-    .header-fields .header-group {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      width: 24%;
-    }
-    .header-label {
-      font-family: "Roboto", Arial, sans-serif;
-      font-size: 0.93em;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: #222;
-    }
-    .header-input {
-      border: none;
-      border-bottom: 1.5px solid #222;
-      background: none;
-      font-size: 1em;
-      padding: 2px 3px;
-      font-family: inherit;
-      outline: none;
-      min-width: 0;
-      font-weight: 700;
-      width: 100%;
-    }
-    /* Main Grid */
-    .sheet-body {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 250px 1.3fr 1.3fr 1fr;
-      grid-template-rows: 128px 210px 1fr 220px;
-      gap: 18px 18px;
-      padding: 22px 32px 32px 32px;
-      background: #f9fbff;
-      height: 100%;
-      box-sizing: border-box;
-      min-height: 700px;
-    }
-    /* Left panel: abilities, skills, saving throws */
-    .abilities-block {
-      grid-row: 1 / span 4;
-      grid-column: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-    }
-    .ability-card {
-      background: #fff;
-      border: 2px solid #b5bedc;
-      border-radius: 8px;
-      box-shadow: 0 1px 6px #b5bedc11;
-      margin-bottom: 0;
-      padding: 4px 7px 7px 10px;
+    .sheet-img-container {
       position: relative;
-      font-family: "Roboto", Arial, sans-serif;
-      min-height: 58px;
-      display: flex;
-      align-items: center;
-      gap: 11px;
-    }
-    .ability-title {
-      font-family: "Crimson Text", serif;
-      font-size: 1.05em;
-      font-weight: 700;
-      margin-bottom: 1px;
-      letter-spacing: 0.8px;
-      min-width: 88px;
-      text-align: left;
-      flex-shrink: 0;
-    }
-    .ability-score-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
-    .ability-score {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 3px solid #333e6e;
-      background: #fafdff;
-      font-size: 1.37em;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 0;
-      box-shadow: 0 1px 5px #b5bedc2b inset;
-    }
-    .ability-mod {
-      font-size: .97em;
-      font-weight: 400;
-      color: #2b2e4f;
-      text-align: center;
-      margin-top: -2px;
-      letter-spacing: 0.5px;
-    }
-    .savingthrows-card, .skills-card {
+      margin-bottom: 48px;
       background: #fff;
-      border: 2px solid #b5bedc;
-      border-radius: 8px;
-      box-shadow: 0 1px 6px #b5bedc11;
-      padding: 6px 10px 8px 12px;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px #0007;
+      width: 768px;
+      height: 994px;
+      max-width: 98vw;
+      overflow: hidden;
     }
-    .card-title {
-      font-family: "Crimson Text", serif;
-      font-size: 1.03em;
-      font-weight: 600;
-      margin-bottom: 3px;
-      letter-spacing: 1px;
-    }
-    .savingthrow-list,
-    .skills-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      font-size: 0.97em;
-      columns: 1;
-      column-gap: 9px;
-    }
-    .savingthrow-list li,
-    .skills-list li {
-      margin-bottom: 3px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .skills-list {
-      columns: 2;
-    }
-    /* Top row: initiative, armor, HP, etc. */
-    .block {
-      background: #fff;
-      border: 2px solid #b5bedc;
-      border-radius: 8px;
-      box-shadow: 0 1px 6px #b5bedc17;
-      padding: 8px 13px 10px 13px;
-      min-height: 46px;
-      margin-bottom: 0;
-      position: relative;
-      font-family: inherit;
-    }
-    .block-title {
-      font-family: "Crimson Text", serif;
-      font-weight: 700;
-      font-size: 1em;
-      letter-spacing: .8px;
-      margin-bottom: 2px;
-      text-align: left;
-    }
-    .row-flex {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 3px;
-    }
-    .initiative-input, .ac-input, .proficiency-input, .speed-input {
-      width: 42px;
-      height: 32px;
-      font-size: 1.13em;
-      font-weight: 700;
-      text-align: center;
-      border: 2px solid #333e6e;
-      border-radius: 7px;
-      background: #fafdff;
-      font-family: inherit;
-      margin-bottom: 2px;
-    }
-    .ac-input {
-      width: 48px;
-      height: 38px;
-      font-size: 1.28em;
-      border-radius: 17px 17px 13px 13px / 25px 25px 17px 17px;
-    }
-    .proficiency-input {
-      width: 38px;
-      height: 28px;
-      font-size: 1.09em;
-    }
-    .speed-input {
-      width: 90px;
-      height: 28px;
-      font-size: 1em;
-    }
-    .defenses-input {
-      width: 99%;
-      border: none;
-      background: none;
-      font-size: 1em;
-      outline: none;
-      min-height: 28px;
-      font-family: inherit;
-      color: #232336;
-      resize: vertical;
-      margin-top: 3px;
-    }
-    /* HP/Hit dice/Death saves top row */
-    .hp-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 4px;
-    }
-    .hp-input {
-      width: 56px;
-      font-size: 1.13em;
-      font-weight: 700;
-      border: 2px solid #333e6e;
-      border-radius: 7px;
-      background: #fafdff;
-      text-align: center;
-      font-family: inherit;
-      margin-right: 3px;
-    }
-    .temp-hp-input {
-      width: 40px;
-      font-size: 1em;
-      border: 2px solid #333e6e;
-      border-radius: 7px;
-      background: #fafdff;
-      text-align: center;
-      font-family: inherit;
-      margin-right: 2px;
-    }
-    .hitdice-input {
-      width: 62px;
-      font-size: 1.07em;
-      border: 2px solid #333e6e;
-      border-radius: 7px;
-      background: #fafdff;
-      text-align: center;
-      font-family: inherit;
-      margin-right: 2px;
-    }
-    .death-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 2px;
-    }
-    .death-label {
-      font-size: 0.96em;
-      font-weight: 600;
-      margin-right: 2px;
-    }
-    .death-circle {
-      width: 18px;
-      height: 18px;
-      border: 2px solid #333e6e;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 2.5px;
-      background: #fff;
-      cursor: pointer;
-      vertical-align: middle;
-      position: relative;
-      box-sizing: border-box;
-    }
-    .death-circle.filled::after {
-      content: '';
+    .sheet-img {
+      width: 768px;
+      height: 994px;
       display: block;
-      width: 11px;
-      height: 11px;
-      background: #333e6e;
-      border-radius: 50%;
+      user-select: none;
+      pointer-events: none;
       position: absolute;
-      left: 3.2px;
-      top: 3.2px;
+      left: 0; top: 0;
+      z-index: 0;
     }
-    /* Proficiencies, Senses, etc. */
-    .proficiencies-box, .senses-box {
-      width: 100%;
-      min-height: 48px;
-      border: none;
-      background: #fafdff;
+    .sheet-fields {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 768px;
+      height: 994px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .charfield, .chartextarea, .charcheckbox {
+      position: absolute;
+      background: rgba(255,255,255,0.7);
+      border: 1.5px solid #888;
+      border-radius: 5px;
+      font-family: 'Segoe UI', Arial, sans-serif;
       font-size: 1em;
-      font-family: inherit;
-      resize: vertical;
-      outline: none;
-      margin-top: 3px;
-    }
-    /* Actions, Attacks, etc. */
-    .attacks-block {
-      grid-column: 2 / span 2;
-      grid-row: 4;
-      display: flex;
-      gap: 18px;
-      height: 100%;
-    }
-    .attacks-card {
-      flex: 3;
-      background: #fff;
-      border: 2px solid #b5bedc;
-      border-radius: 8px;
-      box-shadow: 0 1px 6px #b5bedc17;
-      padding: 8px 10px 10px 10px;
-      display: flex;
-      flex-direction: column;
-      min-width: 280px;
-    }
-    .attacks-title {
-      font-family: "Crimson Text", serif;
-      font-weight: 700;
-      font-size: 1em;
-      letter-spacing: .8px;
-      margin-bottom: 2px;
-      text-align: left;
-    }
-    .attacks-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.97em;
-      margin-bottom: 3px;
-    }
-    .attacks-table th, .attacks-table td {
-      border: 1.1px solid #b5bedc;
-      padding: 2px 4px;
-      text-align: center;
-      background: #fafdff;
-    }
-    .attacks-table th {
-      font-weight: 700;
-      font-family: "Crimson Text", serif;
-    }
-    .attacks-table input {
-      width: 100%;
-      border: none;
-      background: none;
-      font-size: 0.99em;
-      padding: 1px 2px;
-      text-align: center;
-      font-family: inherit;
-      outline: none;
-    }
-    .actions-card {
-      flex: 2;
-      background: #fff;
-      border: 2px solid #b5bedc;
-      border-radius: 8px;
-      box-shadow: 0 1px 6px #b5bedc17;
-      padding: 8px 10px 10px 10px;
-      display: flex;
-      flex-direction: column;
-      min-width: 180px;
-      gap: 8px;
-    }
-    .actions-title {
-      font-family: "Crimson Text", serif;
-      font-weight: 700;
-      font-size: 1em;
-      margin-bottom: 2px;
-      letter-spacing: 0.7px;
-    }
-    .actions-area, .bonusactions-area {
-      width: 100%;
-      min-height: 62px;
-      border: 1.5px solid #b5bedc;
-      border-radius: 6px;
-      padding: 5px 7px 5px 7px;
-      background: #fafdff;
-      font-family: inherit;
-      font-size: 0.99em;
-      resize: vertical;
+      color: #181818;
+      padding: 2px 6px;
       box-sizing: border-box;
+      outline: none;
+      pointer-events: auto;
+      transition: border 0.2s;
+    }
+    .charfield:focus, .chartextarea:focus {
+      border: 2.5px solid #004aad;
+      background: #fff;
+    }
+    .charfield { height: 23px; }
+    .chartextarea { resize: none; }
+    .charcheckbox {
+      background: transparent;
+      border: none;
+      width: 18px; height: 18px;
+      margin: 0;
+      padding: 0;
+      accent-color: #222;
+    }
+    .label-hint {
+      position: absolute;
+      font-size: 0.80em;
+      color: #555;
+      pointer-events: none;
+      z-index: 2;
     }
     /* Responsive */
-    @media (max-width: 1200px) {
-      .sheet-main { max-width: 98vw; }
-      .sheet-body { grid-template-columns: 1fr 1.1fr 1.1fr .8fr; }
-    }
-    @media (max-width: 900px) {
-      .sheet-body { grid-template-columns: 1fr; grid-template-rows: none; }
-      .abilities-block, .block, .attacks-block { grid-column: 1 !important; }
-      .attacks-block { flex-direction: column; }
-      .actions-card, .attacks-card { min-width: 99vw; }
+    @media (max-width: 800px) {
+      .sheet-img-container, .sheet-fields {
+        width: 98vw !important;
+        min-width: 0 !important;
+        max-width: 100vw !important;
+      }
+      .sheet-img {
+        width: 98vw !important;
+        max-width: 100vw !important;
+        height: auto;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="sheet-main">
-    <!-- Header -->
-    <div class="sheet-header">
-      <img class="logo" src="https://i.imgur.com/Ix7q2Ko.png" alt="D&D Logo">
-      <div class="header-block">
-        <div class="sheet-title">D&D <span class="sheet-subtitle">BEYOND</span></div>
-        <div class="charname-row">
-          <span class="charname-label">CHARACTER NAME</span>
-          <input type="text" class="charname-input" placeholder="Enter name...">
-        </div>
-      </div>
-      <div class="header-fields">
-        <div class="header-group">
-          <label class="header-label">Class & Level</label>
-          <input class="header-input" type="text">
-        </div>
-        <div class="header-group">
-          <label class="header-label">Race</label>
-          <input class="header-input" type="text">
-        </div>
-        <div class="header-group">
-          <label class="header-label">Background</label>
-          <input class="header-input" type="text">
-        </div>
-        <div class="header-group">
-          <label class="header-label">Player Name</label>
-          <input class="header-input" type="text">
-        </div>
+  <div class="sheet-wrapper">
+
+    <!-- PAGE 1 -->
+    <div class="sheet-img-container" style="height:994px;">
+      <img src="5E_CharacterSheet_Fillable-1.png" alt="Character Sheet Page 1" class="sheet-img">
+      <div class="sheet-fields">
+        <!-- Banner Fields -->
+        <input class="charfield" style="top:84px;left:76px;width:263px;" placeholder="Character Name">
+        <input class="charfield" style="top:56px;left:370px;width:110px;" placeholder="Class & Level">
+        <input class="charfield" style="top:56px;left:487px;width:110px;" placeholder="Background">
+        <input class="charfield" style="top:56px;left:606px;width:86px;" placeholder="Player Name">
+        <input class="charfield" style="top:84px;left:370px;width:110px;" placeholder="Race">
+        <input class="charfield" style="top:84px;left:487px;width:110px;" placeholder="Alignment">
+        <input class="charfield" style="top:84px;left:606px;width:86px;" placeholder="Experience Points">
+
+        <!-- Ability Scores -->
+        <input class="charfield" style="top:140px;left:54px;width:64px;text-align:center;" placeholder="STR">
+        <input class="charfield" style="top:212px;left:54px;width:64px;text-align:center;" placeholder="DEX">
+        <input class="charfield" style="top:284px;left:54px;width:64px;text-align:center;" placeholder="CON">
+        <input class="charfield" style="top:356px;left:54px;width:64px;text-align:center;" placeholder="INT">
+        <input class="charfield" style="top:428px;left:54px;width:64px;text-align:center;" placeholder="WIS">
+        <input class="charfield" style="top:500px;left:54px;width:64px;text-align:center;" placeholder="CHA">
+
+        <!-- Inspiration/Proficiency -->
+        <input class="charfield" style="top:142px;left:139px;width:100px;" placeholder="Inspiration">
+        <input class="charfield" style="top:172px;left:139px;width:100px;" placeholder="Proficiency Bonus">
+
+        <!-- Saving Throws (checkboxes) -->
+        <input type="checkbox" class="charcheckbox" style="top:212px;left:150px;">
+        <input type="checkbox" class="charcheckbox" style="top:229px;left:150px;">
+        <input type="checkbox" class="charcheckbox" style="top:246px;left:150px;">
+        <input type="checkbox" class="charcheckbox" style="top:263px;left:150px;">
+        <input type="checkbox" class="charcheckbox" style="top:280px;left:150px;">
+        <input type="checkbox" class="charcheckbox" style="top:297px;left:150px;">
+
+        <!-- Skills (checkboxes) -->
+        <input type="checkbox" class="charcheckbox" style="top:337px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:352px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:367px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:382px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:397px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:412px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:427px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:442px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:457px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:472px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:487px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:502px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:517px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:532px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:547px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:562px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:577px;left:139px;">
+        <input type="checkbox" class="charcheckbox" style="top:592px;left:139px;">
+
+        <!-- Passive Perception -->
+        <input class="charfield" style="top:609px;left:54px;width:185px;" placeholder="Passive Wisdom (Perception)">
+        <!-- Other Proficiencies & Languages -->
+        <textarea class="chartextarea" style="top:647px;left:54px;width:185px;height:60px;" placeholder="Other Proficiencies & Languages"></textarea>
+
+        <!-- Center: AC, Initiative, Speed -->
+        <input class="charfield" style="top:140px;left:263px;width:56px;text-align:center;" placeholder="AC">
+        <input class="charfield" style="top:140px;left:341px;width:56px;text-align:center;" placeholder="Initiative">
+        <input class="charfield" style="top:140px;left:419px;width:56px;text-align:center;" placeholder="Speed">
+
+        <!-- Current Hit Points -->
+        <input class="charfield" style="top:207px;left:263px;width:212px;" placeholder="Hit Point Maximum">
+        <textarea class="chartextarea" style="top:234px;left:263px;width:212px;height:44px;" placeholder="Current Hit Points"></textarea>
+        <!-- Temporary Hit Points -->
+        <input class="charfield" style="top:286px;left:263px;width:212px;" placeholder="Temporary Hit Points">
+
+        <!-- Hit Dice & Death Saves -->
+        <input class="charfield" style="top:325px;left:263px;width:70px;" placeholder="Hit Dice">
+        <!-- Death Saves: checkboxes for Successes & Failures -->
+        <input type="checkbox" class="charcheckbox" style="top:335px;left:355px;">
+        <input type="checkbox" class="charcheckbox" style="top:335px;left:375px;">
+        <input type="checkbox" class="charcheckbox" style="top:335px;left:395px;">
+        <input type="checkbox" class="charcheckbox" style="top:335px;left:440px;">
+        <input type="checkbox" class="charcheckbox" style="top:335px;left:460px;">
+        <input type="checkbox" class="charcheckbox" style="top:335px;left:480px;">
+
+        <!-- Attacks & Spellcasting -->
+        <textarea class="chartextarea" style="top:370px;left:263px;width:212px;height:62px;" placeholder="Attacks & Spellcasting"></textarea>
+
+        <!-- Equipment -->
+        <textarea class="chartextarea" style="top:445px;left:263px;width:212px;height:77px;" placeholder="Equipment"></textarea>
+
+        <!-- Right Column: Personality, Ideals, Bonds, Flaws -->
+        <textarea class="chartextarea" style="top:140px;left:505px;width:200px;height:48px;" placeholder="Personality Traits"></textarea>
+        <textarea class="chartextarea" style="top:202px;left:505px;width:200px;height:48px;" placeholder="Ideals"></textarea>
+        <textarea class="chartextarea" style="top:264px;left:505px;width:200px;height:48px;" placeholder="Bonds"></textarea>
+        <textarea class="chartextarea" style="top:326px;left:505px;width:200px;height:48px;" placeholder="Flaws"></textarea>
+        <!-- Features & Traits -->
+        <textarea class="chartextarea" style="top:390px;left:505px;width:200px;height:132px;" placeholder="Features & Traits"></textarea>
       </div>
     </div>
-    <!-- Main Body -->
-    <div class="sheet-body">
-      <!-- Abilities/Saving Throws/Skills -->
-      <div class="abilities-block">
-        <div class="ability-card">
-          <span class="ability-title">STRENGTH</span>
-          <div class="ability-score-wrap">
-            <input class="ability-score" type="text" maxlength="2">
-            <span class="ability-mod"></span>
-          </div>
-        </div>
-        <div class="ability-card">
-          <span class="ability-title">DEXTERITY</span>
-          <div class="ability-score-wrap">
-            <input class="ability-score" type="text" maxlength="2">
-            <span class="ability-mod"></span>
-          </div>
-        </div>
-        <div class="ability-card">
-          <span class="ability-title">CONSTITUTION</span>
-          <div class="ability-score-wrap">
-            <input class="ability-score" type="text" maxlength="2">
-            <span class="ability-mod"></span>
-          </div>
-        </div>
-        <div class="ability-card">
-          <span class="ability-title">INTELLIGENCE</span>
-          <div class="ability-score-wrap">
-            <input class="ability-score" type="text" maxlength="2">
-            <span class="ability-mod"></span>
-          </div>
-        </div>
-        <div class="ability-card">
-          <span class="ability-title">WISDOM</span>
-          <div class="ability-score-wrap">
-            <input class="ability-score" type="text" maxlength="2">
-            <span class="ability-mod"></span>
-          </div>
-        </div>
-        <div class="ability-card">
-          <span class="ability-title">CHARISMA</span>
-          <div class="ability-score-wrap">
-            <input class="ability-score" type="text" maxlength="2">
-            <span class="ability-mod"></span>
-          </div>
-        </div>
-        <div class="savingthrows-card">
-          <div class="card-title">SAVING THROWS</div>
-          <ul class="savingthrow-list">
-            <li><input type="checkbox"> Strength</li>
-            <li><input type="checkbox"> Dexterity</li>
-            <li><input type="checkbox"> Constitution</li>
-            <li><input type="checkbox"> Intelligence</li>
-            <li><input type="checkbox"> Wisdom</li>
-            <li><input type="checkbox"> Charisma</li>
-          </ul>
-        </div>
-        <div class="skills-card">
-          <div class="card-title">SKILLS</div>
-          <ul class="skills-list">
-            <li><input type="checkbox"> Acrobatics (DEX)</li>
-            <li><input type="checkbox"> Animal Handling (WIS)</li>
-            <li><input type="checkbox"> Arcana (INT)</li>
-            <li><input type="checkbox"> Athletics (STR)</li>
-            <li><input type="checkbox"> Deception (CHA)</li>
-            <li><input type="checkbox"> History (INT)</li>
-            <li><input type="checkbox"> Insight (WIS)</li>
-            <li><input type="checkbox"> Intimidation (CHA)</li>
-            <li><input type="checkbox"> Investigation (INT)</li>
-            <li><input type="checkbox"> Medicine (WIS)</li>
-            <li><input type="checkbox"> Nature (INT)</li>
-            <li><input type="checkbox"> Perception (WIS)</li>
-            <li><input type="checkbox"> Performance (CHA)</li>
-            <li><input type="checkbox"> Persuasion (CHA)</li>
-            <li><input type="checkbox"> Religion (INT)</li>
-            <li><input type="checkbox"> Sleight of Hand (DEX)</li>
-            <li><input type="checkbox"> Stealth (DEX)</li>
-            <li><input type="checkbox"> Survival (WIS)</li>
-          </ul>
-        </div>
+
+    <!-- PAGE 2 -->
+    <div class="sheet-img-container" style="height:994px;">
+      <img src="5E_CharacterSheet_Fillable-2.png" alt="Character Sheet Page 2" class="sheet-img">
+      <div class="sheet-fields">
+        <!-- Character Name -->
+        <input class="charfield" style="top:56px;left:72px;width:263px;" placeholder="Character Name">
+
+        <!-- Age, Height, Weight, Eyes, Skin, Hair -->
+        <input class="charfield" style="top:53px;left:442px;width:60px;" placeholder="Age">
+        <input class="charfield" style="top:53px;left:505px;width:60px;" placeholder="Height">
+        <input class="charfield" style="top:53px;left:568px;width:60px;" placeholder="Weight">
+        <input class="charfield" style="top:77px;left:442px;width:60px;" placeholder="Eyes">
+        <input class="charfield" style="top:77px;left:505px;width:60px;" placeholder="Skin">
+        <input class="charfield" style="top:77px;left:568px;width:60px;" placeholder="Hair">
+
+        <!-- Character Appearance -->
+        <textarea class="chartextarea" style="top:134px;left:36px;width:250px;height:200px;" placeholder="Character Appearance"></textarea>
+
+        <!-- Allies & Organizations -->
+        <textarea class="chartextarea" style="top:134px;left:308px;width:210px;height:200px;" placeholder="Allies & Organizations"></textarea>
+        <!-- Symbol sub-box inside Allies & Organizations -->
+        <textarea class="chartextarea" style="top:146px;left:444px;width:66px;height:60px;font-size:0.9em;" placeholder="Symbol"></textarea>
+
+        <!-- Character Backstory -->
+        <textarea class="chartextarea" style="top:355px;left:36px;width:250px;height:185px;" placeholder="Character Backstory"></textarea>
+
+        <!-- Additional Features & Traits -->
+        <textarea class="chartextarea" style="top:355px;left:308px;width:210px;height:94px;" placeholder="Additional Features & Traits"></textarea>
+
+        <!-- Treasure -->
+        <textarea class="chartextarea" style="top:461px;left:308px;width:210px;height:78px;" placeholder="Treasure"></textarea>
       </div>
-      <!-- Initiative, AC, Defenses, Proficiency, Speed -->
-      <div class="block" style="grid-row: 1; grid-column: 2;">
-        <div class="row-flex">
-          <div>
-            <div class="block-title">INITIATIVE</div>
-            <input class="initiative-input" type="text" maxlength="3">
-          </div>
-          <div>
-            <div class="block-title">ARMOR CLASS</div>
-            <input class="ac-input" type="text" maxlength="3">
-          </div>
-        </div>
-        <div style="margin-top: 8px;">
-          <div class="block-title">DEFENSES / RESISTANCES / IMMUNITIES</div>
-          <input class="defenses-input" type="text" placeholder="e.g. Fire, Necrotic, Poison" />
-        </div>
-      </div>
-      <div class="block" style="grid-row: 1; grid-column: 3;">
-        <div class="row-flex">
-          <div>
-            <div class="block-title">PROFICIENCY BONUS</div>
-            <input class="proficiency-input" type="text" maxlength="3">
-          </div>
-          <div>
-            <div class="block-title">SPEED</div>
-            <input class="speed-input" type="text" maxlength="10">
-          </div>
-        </div>
-        <div style="margin-top: 8px;">
-          <div class="block-title">SENSES</div>
-          <div style="font-size:0.98em;">
-            Passive Wisdom (Perception): <input type="text" style="width:34px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;">
-            <br>
-            Passive Wisdom (Insight): <input type="text" style="width:34px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;">
-            <br>
-            Passive Intelligence (Investigation): <input type="text" style="width:34px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;">
-            <br>
-            Darkvision: <input type="text" style="width:40px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;"> ft.
-          </div>
-        </div>
-      </div>
-      <!-- HP, Hit Dice, Death Saves, Proficiencies -->
-      <div class="block" style="grid-row: 1; grid-column: 4;">
-        <div>
-          <div class="block-title">HIT POINTS</div>
-          <div class="hp-row">
-            <input class="hp-input" type="text" maxlength="5" placeholder="Max HP">
-            <input class="temp-hp-input" type="text" maxlength="5" placeholder="Temp">
-          </div>
-        </div>
-        <div>
-          <div class="block-title">HIT DICE</div>
-          <input class="hitdice-input" type="text" maxlength="12">
-        </div>
-        <div>
-          <div class="block-title">DEATH SAVES</div>
-          <div class="death-row">
-            <span class="death-label">Successes</span>
-            <span class="death-circle" onclick="toggleDeathSave(this)"></span>
-            <span class="death-circle" onclick="toggleDeathSave(this)"></span>
-            <span class="death-circle" onclick="toggleDeathSave(this)"></span>
-            <span class="death-label" style="margin-left:4px;">Failures</span>
-            <span class="death-circle" onclick="toggleDeathSave(this)"></span>
-            <span class="death-circle" onclick="toggleDeathSave(this)"></span>
-            <span class="death-circle" onclick="toggleDeathSave(this)"></span>
-          </div>
-        </div>
-        <div>
-          <div class="block-title">PROFICIENCIES & LANGUAGES</div>
-          <textarea class="proficiencies-box" rows="2"></textarea>
-        </div>
-      </div>
-      <!-- Attacks/Cantrips + Actions/Bonus Actions -->
-      <div class="attacks-block">
-        <div class="attacks-card">
-          <div class="attacks-title">WEAPON ATTACKS &amp; CANTRIPS</div>
-          <table class="attacks-table">
-            <thead>
-              <tr>
-                <th>Attack / Spell</th>
-                <th>Bonus</th>
-                <th>Damage / Type</th>
-                <th>Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="actions-card">
-          <div>
-            <div class="actions-title">ACTIONS</div>
-            <textarea class="actions-area" placeholder="Standard Actions, Extra Attack, etc."></textarea>
-          </div>
-          <div>
-            <div class="actions-title">BONUS ACTIONS</div>
-            <textarea class="bonusactions-area" placeholder="Bonus Actions, Features, etc."></textarea>
-          </div>
-        </div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="sheet-img-container" style="height:994px;">
+      <img src="5E_CharacterSheet_Fillable-3.png" alt="Character Sheet Page 3" class="sheet-img">
+      <div class="sheet-fields">
+        <!-- Spellcasting Class -->
+        <input class="charfield" style="top:56px;left:72px;width:140px;" placeholder="Spellcasting Class">
+        <input class="charfield" style="top:56px;left:251px;width:95px;" placeholder="Spellcasting Ability">
+        <input class="charfield" style="top:56px;left:355px;width:95px;" placeholder="Spell Save DC">
+        <input class="charfield" style="top:56px;left:459px;width:95px;" placeholder="Spell Attack Bonus">
+
+        <!-- Cantrips -->
+        <textarea class="chartextarea" style="top:110px;left:36px;width:170px;height:90px;" placeholder="Cantrips"></textarea>
+        <!-- Levels 1-9 -->
+        <!-- Level 1 -->
+        <input class="charfield" style="top:219px;left:64px;width:36px;" placeholder="Slots Total">
+        <input class="charfield" style="top:219px;left:108px;width:36px;" placeholder="Expended">
+        <textarea class="chartextarea" style="top:243px;left:36px;width:170px;height:64px;" placeholder="Level 1 Spells"></textarea>
+        <!-- Level 2 -->
+        <textarea class="chartextarea" style="top:316px;left:36px;width:170px;height:64px;" placeholder="Level 2 Spells"></textarea>
+        <!-- Level 3 -->
+        <textarea class="chartextarea" style="top:389px;left:36px;width:170px;height:64px;" placeholder="Level 3 Spells"></textarea>
+        <!-- Level 4 -->
+        <textarea class="chartextarea" style="top:462px;left:36px;width:170px;height:64px;" placeholder="Level 4 Spells"></textarea>
+        <!-- Level 5 -->
+        <textarea class="chartextarea" style="top:535px;left:36px;width:170px;height:64px;" placeholder="Level 5 Spells"></textarea>
+        <!-- Level 6 -->
+        <textarea class="chartextarea" style="top:608px;left:36px;width:170px;height:64px;" placeholder="Level 6 Spells"></textarea>
+        <!-- Level 7 -->
+        <textarea class="chartextarea" style="top:681px;left:36px;width:170px;height:64px;" placeholder="Level 7 Spells"></textarea>
+        <!-- Level 8 -->
+        <textarea class="chartextarea" style="top:754px;left:36px;width:170px;height:64px;" placeholder="Level 8 Spells"></textarea>
+        <!-- Level 9 -->
+        <textarea class="chartextarea" style="top:827px;left:36px;width:170px;height:64px;" placeholder="Level 9 Spells"></textarea>
+        <!-- Repeat for each spell level column as desired (or add more as needed for your layout) -->
       </div>
     </div>
   </div>
-  <script>
-    function toggleDeathSave(el) {
-      el.classList.toggle('filled');
-    }
-  </script>
 </body>
 </html>
