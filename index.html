@@ -2,136 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>D&D 5e Character Sheet (Editable - D&D Beyond Style)</title>
-  <meta name="viewport" content="width=900">
+  <title>D&D Beyond Character Sheet (Editable)</title>
+  <meta name="viewport" content="width=1200">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Crimson+Text:700,400" rel="stylesheet">
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
-      background: #f4f6fa;
-      font-family: 'Roboto', Arial, sans-serif;
-      color: #222;
+      padding: 0;
+      background: #f3f6fa;
+    }
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-family: "Roboto", Arial, sans-serif;
+      color: #232336;
     }
     .sheet-main {
-      max-width: 880px;
-      margin: 28px auto 28px auto;
+      max-width: 1100px;
+      min-height: 95vh;
+      margin: 20px auto;
+      background: #fff;
       border: 2.5px solid #222;
-      border-radius: 11px;
-      background: #fff;
+      border-radius: 13px;
       box-shadow: 0 2px 32px #0002;
-      padding: 0 0 10px 0;
-      overflow: hidden;
-    }
-    .sheet-grid {
-      display: grid;
-      grid-template-columns: 176px 240px 190px 1fr;
-      grid-template-rows: 66px 44px 220px 116px 1fr;
-      gap: 8px 10px;
-      padding: 18px 17px 12px 17px;
-      background: #fff;
-      min-height: 1000px;
-      position: relative;
-    }
-    /* Header row */
-    .logo-banner {
-      grid-column: 1 / span 2;
-      grid-row: 1;
-      display: flex;
-      align-items: flex-end;
-      height: 62px;
-      background: none;
-    }
-    .logo-img {
-      height: 45px;
-      margin-right: 11px;
-    }
-    .logo-title {
-      font-size: 1.8em;
-      letter-spacing: 1.2px;
-      font-family: 'Crimson Text', serif;
-      font-weight: 700;
-    }
-    .header-fields {
-      grid-column: 3 / span 2;
-      grid-row: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px 6px;
-      align-items: end;
-      height: 62px;
-      background: none;
-    }
-    .header-field {
       display: flex;
       flex-direction: column;
-      font-size: 0.96em;
-      margin-bottom: 2px;
+      padding: 0;
+    }
+    .sheet-header {
+      display: flex;
+      align-items: flex-end;
+      border-bottom: 2px solid #222;
+      padding: 18px 32px 0 32px;
+      background: #f7faff;
+      gap: 18px;
+    }
+    .logo {
+      height: 48px;
+    }
+    .header-block {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 9px;
+    }
+    .sheet-title {
+      font-family: "Crimson Text", serif;
+      font-size: 2.1em;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+    .sheet-subtitle {
+      font-size: 1.05em;
+      font-family: "Crimson Text", serif;
+      font-weight: 400;
+      margin-left: 7px;
+      letter-spacing: 1px;
+    }
+    .charname-row {
+      display: flex;
+      align-items: center;
+      margin-top: 3px;
+      margin-bottom: 5px;
+      gap: 12px;
+    }
+    .charname-label {
+      font-family: "Roboto", Arial, sans-serif;
+      font-weight: 900;
+      font-size: 1.07em;
+      letter-spacing: 1.1px;
+      margin-right: 3px;
+    }
+    .charname-input {
+      font-family: "Crimson Text", serif;
+      font-size: 1.3em;
+      font-weight: 700;
+      border: none;
+      border-bottom: 2px solid #222;
+      background: transparent;
+      outline: none;
+      padding: 2px 4px;
+      width: 290px;
+    }
+    .header-fields {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 1em;
+    }
+    .header-fields .header-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      width: 24%;
     }
     .header-label {
+      font-family: "Roboto", Arial, sans-serif;
       font-size: 0.93em;
       font-weight: 600;
       letter-spacing: 0.5px;
       color: #222;
-      font-family: 'Roboto', sans-serif;
     }
     .header-input {
       border: none;
-      border-bottom: 1.4px solid #222;
-      background: none;
-      font-size: 1em;
-      padding: 2px 4px;
-      font-family: inherit;
-      outline: none;
-      min-width: 0;
-      font-weight: 700;
-    }
-    .charname-row {
-      grid-column: 1 / span 2;
-      grid-row: 2;
-      display: flex;
-      align-items: center;
-      border-bottom: 2.2px solid #222;
-      height: 34px;
-    }
-    .charname-label {
-      width: 105px;
-      font-size: 1.15em;
-      color: #111;
-      padding-left: 7px;
-    }
-    .charname-input {
-      flex: 1;
-      border: none;
-      background: none;
-      font-size: 1.25em;
-      font-family: 'Crimson Text', serif;
-      font-weight: 700;
-      outline: none;
-      padding: 3px 8px;
-      color: #111;
-    }
-    .charinfo-fields {
-      grid-column: 3 / span 2;
-      grid-row: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 6px;
-      align-items: end;
-    }
-    .charinfo-field {
-      display: flex;
-      flex-direction: column;
-      font-size: 0.95em;
-    }
-    .charinfo-label {
-      font-size: 0.93em;
-      font-weight: 600;
-      color: #222;
-      margin-bottom: 1px;
-    }
-    .charinfo-input {
-      border: none;
-      border-bottom: 1.4px solid #222;
+      border-bottom: 1.5px solid #222;
       background: none;
       font-size: 1em;
       padding: 2px 3px;
@@ -139,344 +119,215 @@
       outline: none;
       min-width: 0;
       font-weight: 700;
+      width: 100%;
     }
-    /* Ability/left column */
-    .ability-col {
-      grid-row: 3 / span 2;
+    /* Main Grid */
+    .sheet-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 250px 1.3fr 1.3fr 1fr;
+      grid-template-rows: 128px 210px 1fr 220px;
+      gap: 18px 18px;
+      padding: 22px 32px 32px 32px;
+      background: #f9fbff;
+      height: 100%;
+      box-sizing: border-box;
+      min-height: 700px;
+    }
+    /* Left panel: abilities, skills, saving throws */
+    .abilities-block {
+      grid-row: 1 / span 4;
       grid-column: 1;
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 13px;
     }
-    .ability-box {
-      background: #f6f9ff;
+    .ability-card {
+      background: #fff;
       border: 2px solid #b5bedc;
-      border-radius: 7px;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px #b5bedc11;
       margin-bottom: 0;
-      padding: 7px 6px 7px 8px;
+      padding: 4px 7px 7px 10px;
       position: relative;
-      font-family: 'Roboto', sans-serif;
-      box-shadow: 0 2px 7px #b5bedc25;
+      font-family: "Roboto", Arial, sans-serif;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
     }
     .ability-title {
-      font-family: 'Crimson Text', serif;
-      font-size: 1em;
+      font-family: "Crimson Text", serif;
+      font-size: 1.05em;
       font-weight: 700;
       margin-bottom: 1px;
-      letter-spacing: 1px;
-      text-align: center;
+      letter-spacing: 0.8px;
+      min-width: 88px;
+      text-align: left;
+      flex-shrink: 0;
     }
-    .ability-score-row {
+    .ability-score-wrap {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 9px;
-      margin-bottom: 3px;
-      justify-content: center;
+      gap: 0;
     }
     .ability-score {
-      width: 38px;
-      height: 38px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       border: 3px solid #333e6e;
-      background: #fff;
-      font-size: 1.35em;
+      background: #fafdff;
+      font-size: 1.37em;
       font-weight: 700;
       text-align: center;
-      margin-right: 7px;
+      margin-bottom: 0;
       box-shadow: 0 1px 5px #b5bedc2b inset;
     }
-    .ability-sub {
-      font-size: 0.90em;
-      font-weight: 700;
+    .ability-mod {
+      font-size: .97em;
+      font-weight: 400;
       color: #2b2e4f;
       text-align: center;
+      margin-top: -2px;
       letter-spacing: 0.5px;
     }
-    .savingthrows-box {
-      background: #e8edfa;
-      border: 1.5px solid #b5bedc;
-      border-radius: 7px;
-      margin-top: 4px;
-      margin-bottom: 0;
-      padding: 6px 6px 3px 10px;
-      font-size: 0.98em;
-      box-shadow: 0 1px 4px #b5bedc1a;
+    .savingthrows-card, .skills-card {
+      background: #fff;
+      border: 2px solid #b5bedc;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px #b5bedc11;
+      padding: 6px 10px 8px 12px;
     }
-    .savingthrows-title {
-      font-size: 1em;
-      font-family: 'Crimson Text', serif;
-      font-weight: 700;
-      margin-bottom: 2px;
-      letter-spacing: 0.5px;
+    .card-title {
+      font-family: "Crimson Text", serif;
+      font-size: 1.03em;
+      font-weight: 600;
+      margin-bottom: 3px;
+      letter-spacing: 1px;
     }
-    .savingthrows-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      font-size: 0.97em;
-    }
-    .savingthrows-list li {
-      margin-bottom: 1.5px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .skills-box {
-      background: #e8edfa;
-      border: 1.5px solid #b5bedc;
-      border-radius: 7px;
-      margin-top: 2.5px;
-      margin-bottom: 0;
-      padding: 6px 6px 3px 10px;
-      font-size: 0.98em;
-      box-shadow: 0 1px 4px #b5bedc1a;
-    }
-    .skills-title {
-      font-size: 1em;
-      font-family: 'Crimson Text', serif;
-      font-weight: 700;
-      margin-bottom: 2px;
-      letter-spacing: 0.5px;
-    }
+    .savingthrow-list,
     .skills-list {
+      list-style: none;
       margin: 0;
       padding: 0;
-      list-style: none;
       font-size: 0.97em;
-      columns: 2;
+      columns: 1;
       column-gap: 9px;
     }
+    .savingthrow-list li,
     .skills-list li {
-      margin-bottom: 1.5px;
+      margin-bottom: 3px;
       display: flex;
       align-items: center;
-      gap: 3px;
+      gap: 7px;
     }
-    /* Center column 1: Initiative/AC/Defenses/Proficiency/Speed */
-    .center1-top {
-      grid-row: 3;
-      grid-column: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 46px 1fr 46px;
-      gap: 7px 7px;
-      min-height: 210px;
+    .skills-list {
+      columns: 2;
     }
-    .initiative-box, .ac-box {
-      background: #e8edfa;
+    /* Top row: initiative, armor, HP, etc. */
+    .block {
+      background: #fff;
       border: 2px solid #b5bedc;
-      border-radius: 7px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px #b5bedc17;
+      padding: 8px 13px 10px 13px;
+      min-height: 46px;
+      margin-bottom: 0;
+      position: relative;
       font-family: inherit;
-      font-size: 1em;
+    }
+    .block-title {
+      font-family: "Crimson Text", serif;
       font-weight: 700;
-      box-shadow: 0 1px 4px #b5bedc29;
+      font-size: 1em;
+      letter-spacing: .8px;
+      margin-bottom: 2px;
+      text-align: left;
     }
-    .initiative-label, .ac-label {
-      font-size: 0.85em;
-      margin-bottom: 1px;
-      margin-top: 2px;
-      letter-spacing: 0.4px;
-      color: #222;
+    .row-flex {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 3px;
     }
-    .initiative-input {
-      width: 41px;
-      height: 28px;
-      font-size: 1.19em;
+    .initiative-input, .ac-input, .proficiency-input, .speed-input {
+      width: 42px;
+      height: 32px;
+      font-size: 1.13em;
       font-weight: 700;
       text-align: center;
       border: 2px solid #333e6e;
-      border-radius: 6px;
-      margin-bottom: 2px;
-      background: #fff;
+      border-radius: 7px;
+      background: #fafdff;
       font-family: inherit;
+      margin-bottom: 2px;
     }
     .ac-input {
-      width: 43px;
-      height: 36px;
+      width: 48px;
+      height: 38px;
+      font-size: 1.28em;
       border-radius: 17px 17px 13px 13px / 25px 25px 17px 17px;
-      border: 3px solid #333e6e;
-      font-size: 1.38em;
-      font-weight: 700;
-      text-align: center;
-      background: #fff;
-      font-family: inherit;
-    }
-    .defenses-box {
-      grid-column: 1 / span 2;
-      background: #f6f9ff;
-      border: 2px solid #b5bedc;
-      border-radius: 7px;
-      margin-top: 0;
-      padding: 5px 5px 5px 8px;
-      min-height: 32px;
-      font-family: inherit;
-      font-size: 0.98em;
-      box-shadow: 0 1px 4px #b5bedc1a;
-    }
-    .proficiency-box {
-      background: #e8edfa;
-      border: 2px solid #b5bedc;
-      border-radius: 7px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: inherit;
-      font-size: 1em;
-      min-height: 38px;
-      box-shadow: 0 1px 4px #b5bedc1a;
-    }
-    .proficiency-label {
-      font-size: 0.87em;
-      margin-bottom: 1px;
-      color: #222;
     }
     .proficiency-input {
-      width: 37px;
-      height: 26px;
+      width: 38px;
+      height: 28px;
       font-size: 1.09em;
-      font-weight: 700;
-      text-align: center;
-      border: 2px solid #333e6e;
-      border-radius: 6px;
-      background: #fff;
-      font-family: inherit;
-    }
-    .speed-box {
-      background: #e8edfa;
-      border: 2px solid #b5bedc;
-      border-radius: 7px;
-      min-height: 38px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: inherit;
-      font-size: 1em;
-      box-shadow: 0 1px 4px #b5bedc1a;
-    }
-    .speed-label {
-      font-size: 0.87em;
-      margin-bottom: 1px;
-      color: #222;
     }
     .speed-input {
       width: 90px;
-      text-align: center;
-      border: 2px solid #333e6e;
-      border-radius: 6px;
-      font-size: 1.05em;
-      background: #fff;
+      height: 28px;
+      font-size: 1em;
+    }
+    .defenses-input {
+      width: 99%;
+      border: none;
+      background: none;
+      font-size: 1em;
+      outline: none;
+      min-height: 28px;
       font-family: inherit;
+      color: #232336;
+      resize: vertical;
+      margin-top: 3px;
     }
-    /* Center 2: HP, Hit Dice, Death Saves, Proficiencies */
-    .center2-top {
-      grid-row: 3;
-      grid-column: 3 / span 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 54px 54px 1fr;
-      gap: 8px 7px;
-      min-height: 210px;
-    }
-    .hp-box {
-      background: #f6f9ff;
-      border: 2px solid #b5bedc;
-      border-radius: 7px;
-      padding: 7px 6px 6px 8px;
-      font-family: inherit;
-      box-shadow: 0 1px 4px #b5bedc1a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 60px;
-    }
-    .hp-label {
-      font-size: 0.87em;
-      font-weight: 600;
-      color: #222;
-      margin-bottom: 3px;
-      font-family: 'Roboto', sans-serif;
-    }
+    /* HP/Hit dice/Death saves top row */
     .hp-row {
       display: flex;
-      gap: 7px;
       align-items: center;
-      margin-bottom: 2px;
+      gap: 10px;
+      margin-bottom: 4px;
     }
     .hp-input {
       width: 56px;
-      font-size: 1.18em;
+      font-size: 1.13em;
       font-weight: 700;
       border: 2px solid #333e6e;
       border-radius: 7px;
-      background: #fff;
+      background: #fafdff;
       text-align: center;
       font-family: inherit;
+      margin-right: 3px;
     }
     .temp-hp-input {
-      width: 42px;
+      width: 40px;
       font-size: 1em;
       border: 2px solid #333e6e;
       border-radius: 7px;
-      background: #fff;
+      background: #fafdff;
       text-align: center;
       font-family: inherit;
-    }
-    .hitdice-box {
-      background: #f6f9ff;
-      border: 2px solid #b5bedc;
-      border-radius: 7px;
-      padding: 7px 6px 6px 8px;
-      font-family: inherit;
-      box-shadow: 0 1px 4px #b5bedc1a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 60px;
-    }
-    .hitdice-label {
-      font-size: 0.87em;
-      font-weight: 600;
-      color: #222;
-      margin-bottom: 3px;
-      font-family: 'Roboto', sans-serif;
+      margin-right: 2px;
     }
     .hitdice-input {
-      width: 60px;
-      font-size: 1.12em;
-      font-weight: 700;
+      width: 62px;
+      font-size: 1.07em;
       border: 2px solid #333e6e;
       border-radius: 7px;
-      background: #fff;
+      background: #fafdff;
       text-align: center;
       font-family: inherit;
-    }
-    .deathsaves-box {
-      background: #f6f9ff;
-      border: 2px solid #b5bedc;
-      border-radius: 7px;
-      padding: 7px 6px 6px 8px;
-      font-family: inherit;
-      box-shadow: 0 1px 4px #b5bedc1a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 60px;
-    }
-    .deathsaves-label {
-      font-size: 0.87em;
-      font-weight: 600;
-      color: #222;
-      margin-bottom: 3px;
-      font-family: 'Roboto', sans-serif;
+      margin-right: 2px;
     }
     .death-row {
       display: flex;
@@ -484,90 +335,73 @@
       gap: 8px;
       margin-bottom: 2px;
     }
+    .death-label {
+      font-size: 0.96em;
+      font-weight: 600;
+      margin-right: 2px;
+    }
     .death-circle {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       border: 2px solid #333e6e;
       border-radius: 50%;
       display: inline-block;
-      margin-right: 3px;
+      margin-right: 2.5px;
       background: #fff;
       cursor: pointer;
       vertical-align: middle;
       position: relative;
+      box-sizing: border-box;
     }
     .death-circle.filled::after {
       content: '';
       display: block;
-      width: 7.5px;
-      height: 7.5px;
+      width: 11px;
+      height: 11px;
       background: #333e6e;
       border-radius: 50%;
       position: absolute;
-      left: 3.6px;
-      top: 3.4px;
+      left: 3.2px;
+      top: 3.2px;
     }
-    .proficiencies-box {
-      grid-column: 1 / span 3;
-      background: #f6f9ff;
-      border: 2px solid #b5bedc;
-      border-radius: 7px;
-      margin-top: 0;
-      padding: 7px 7px 5px 9px;
-      font-size: 0.98em;
-      min-height: 49px;
-      font-family: inherit;
-      box-shadow: 0 1px 4px #b5bedc1a;
-    }
-    /* Senses (bottom left) */
-    .senses-box {
-      grid-row: 4;
-      grid-column: 2;
-      background: #e8edfa;
-      border: 2px solid #b5bedc;
-      border-radius: 7px;
-      padding: 7px 7px 6px 10px;
-      font-family: inherit;
-      min-height: 94px;
-      box-shadow: 0 1px 4px #b5bedc1a;
-      margin-bottom: 0;
-    }
-    .senses-title {
+    /* Proficiencies, Senses, etc. */
+    .proficiencies-box, .senses-box {
+      width: 100%;
+      min-height: 48px;
+      border: none;
+      background: #fafdff;
       font-size: 1em;
-      font-family: 'Crimson Text', serif;
-      font-weight: 700;
-      margin-bottom: 3px;
-      letter-spacing: 0.6px;
-    }
-    .senses-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      font-size: 0.98em;
-    }
-    .senses-list li {
-      margin-bottom: 2px;
-    }
-    /* Weapon Attacks & Cantrips (bottom center) */
-    .attacks-box {
-      grid-row: 4 / span 2;
-      grid-column: 3;
-      background: #e8edfa;
-      border: 2px solid #b5bedc;
-      border-radius: 7px;
-      padding: 7px 7px 4px 7px;
       font-family: inherit;
-      min-height: 90px;
-      box-shadow: 0 1px 4px #b5bedc1a;
-      margin-bottom: 0;
+      resize: vertical;
+      outline: none;
+      margin-top: 3px;
+    }
+    /* Actions, Attacks, etc. */
+    .attacks-block {
+      grid-column: 2 / span 2;
+      grid-row: 4;
+      display: flex;
+      gap: 18px;
+      height: 100%;
+    }
+    .attacks-card {
+      flex: 3;
+      background: #fff;
+      border: 2px solid #b5bedc;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px #b5bedc17;
+      padding: 8px 10px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      min-width: 280px;
     }
     .attacks-title {
-      font-size: 1em;
-      font-family: 'Crimson Text', serif;
+      font-family: "Crimson Text", serif;
       font-weight: 700;
-      margin-bottom: 4px;
-      letter-spacing: 0.6px;
-      text-align: center;
+      font-size: 1em;
+      letter-spacing: .8px;
+      margin-bottom: 2px;
+      text-align: left;
     }
     .attacks-table {
       width: 100%;
@@ -576,14 +410,14 @@
       margin-bottom: 3px;
     }
     .attacks-table th, .attacks-table td {
-      border: 1.2px solid #b5bedc;
+      border: 1.1px solid #b5bedc;
       padding: 2px 4px;
       text-align: center;
-      background: #f9fbff;
+      background: #fafdff;
     }
     .attacks-table th {
       font-weight: 700;
-      font-family: 'Crimson Text', serif;
+      font-family: "Crimson Text", serif;
     }
     .attacks-table input {
       width: 100%;
@@ -595,151 +429,130 @@
       font-family: inherit;
       outline: none;
     }
-    /* Actions & Bonus Actions (bottom right) */
-    .actions-box {
-      grid-row: 4 / span 2;
-      grid-column: 4;
-      background: #e8edfa;
+    .actions-card {
+      flex: 2;
+      background: #fff;
       border: 2px solid #b5bedc;
-      border-radius: 7px;
-      padding: 7px 9px 7px 9px;
-      font-family: inherit;
-      font-size: 0.98em;
-      min-height: 90px;
-      box-shadow: 0 1px 4px #b5bedc1a;
-      margin-bottom: 0;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px #b5bedc17;
+      padding: 8px 10px 10px 10px;
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      min-width: 180px;
+      gap: 8px;
     }
     .actions-title {
-      font-size: 1em;
-      font-family: 'Crimson Text', serif;
+      font-family: "Crimson Text", serif;
       font-weight: 700;
-      margin-bottom: 1px;
-      letter-spacing: 0.6px;
+      font-size: 1em;
+      margin-bottom: 2px;
+      letter-spacing: 0.7px;
     }
     .actions-area, .bonusactions-area {
       width: 100%;
-      min-height: 48px;
+      min-height: 62px;
       border: 1.5px solid #b5bedc;
-      border-radius: 7px;
-      padding: 4px 4px 4px 7px;
-      background: #f9fbff;
+      border-radius: 6px;
+      padding: 5px 7px 5px 7px;
+      background: #fafdff;
       font-family: inherit;
-      font-size: 0.98em;
+      font-size: 0.99em;
       resize: vertical;
       box-sizing: border-box;
     }
     /* Responsive */
-    @media (max-width: 1100px) {
-      .sheet-main { max-width: 99vw; }
-      .sheet-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    @media (max-width: 1200px) {
+      .sheet-main { max-width: 98vw; }
+      .sheet-body { grid-template-columns: 1fr 1.1fr 1.1fr .8fr; }
     }
     @media (max-width: 900px) {
-      .sheet-grid { grid-template-columns: 1fr; grid-template-rows: none; }
-      .logo-banner, .charname-row, .header-fields, .charinfo-fields, .ability-col, .center1-top, .center2-top, .senses-box, .attacks-box, .actions-box { grid-column: 1 !important; }
+      .sheet-body { grid-template-columns: 1fr; grid-template-rows: none; }
+      .abilities-block, .block, .attacks-block { grid-column: 1 !important; }
+      .attacks-block { flex-direction: column; }
+      .actions-card, .attacks-card { min-width: 99vw; }
     }
   </style>
 </head>
 <body>
   <div class="sheet-main">
-    <div class="sheet-grid">
-      <!-- Logo Banner -->
-      <div class="logo-banner">
-        <img src="https://i.imgur.com/Ix7q2Ko.png" alt="D&D Logo" class="logo-img">
-        <span class="logo-title">D&D <span style="font-size:0.7em;font-weight:normal">BEYOND</span></span>
+    <!-- Header -->
+    <div class="sheet-header">
+      <img class="logo" src="https://i.imgur.com/Ix7q2Ko.png" alt="D&D Logo">
+      <div class="header-block">
+        <div class="sheet-title">D&D <span class="sheet-subtitle">BEYOND</span></div>
+        <div class="charname-row">
+          <span class="charname-label">CHARACTER NAME</span>
+          <input type="text" class="charname-input" placeholder="Enter name...">
+        </div>
       </div>
-      <!-- Header Fields -->
       <div class="header-fields">
-        <div class="header-field">
-          <span class="header-label">Class & Level</span>
-          <input class="header-input" type="text" maxlength="30">
+        <div class="header-group">
+          <label class="header-label">Class & Level</label>
+          <input class="header-input" type="text">
         </div>
-        <div class="header-field">
-          <span class="header-label">Player Name</span>
-          <input class="header-input" type="text" maxlength="30">
+        <div class="header-group">
+          <label class="header-label">Race</label>
+          <input class="header-input" type="text">
         </div>
-        <div class="header-field">
-          <span class="header-label">Race</span>
-          <input class="header-input" type="text" maxlength="20">
+        <div class="header-group">
+          <label class="header-label">Background</label>
+          <input class="header-input" type="text">
         </div>
-        <div class="header-field">
-          <span class="header-label">Background</span>
-          <input class="header-input" type="text" maxlength="20">
-        </div>
-      </div>
-      <!-- Character Name Row -->
-      <div class="charname-row">
-        <span class="charname-label">CHARACTER NAME</span>
-        <input type="text" class="charname-input" placeholder="Enter name...">
-      </div>
-      <!-- Character Info Fields -->
-      <div class="charinfo-fields">
-        <div class="charinfo-field">
-          <span class="charinfo-label">Experience Points</span>
-          <input class="charinfo-input" type="text" maxlength="10">
-        </div>
-        <div class="charinfo-field">
-          <span class="charinfo-label">Milestone</span>
-          <input class="charinfo-input" type="text" maxlength="10">
-        </div>
-        <div class="charinfo-field">
-          <span class="charinfo-label">Alignment</span>
-          <input class="charinfo-input" type="text" maxlength="20">
-        </div>
-        <div class="charinfo-field">
-          <span class="charinfo-label">Deity</span>
-          <input class="charinfo-input" type="text" maxlength="20">
+        <div class="header-group">
+          <label class="header-label">Player Name</label>
+          <input class="header-input" type="text">
         </div>
       </div>
-      <!-- Ability Column -->
-      <div class="ability-col">
-        <div class="ability-box">
-          <div class="ability-title">STRENGTH</div>
-          <div class="ability-score-row">
-            <input class="ability-score" type="text" maxlength="3">
-            <span class="ability-sub" title="Base score"> </span>
+    </div>
+    <!-- Main Body -->
+    <div class="sheet-body">
+      <!-- Abilities/Saving Throws/Skills -->
+      <div class="abilities-block">
+        <div class="ability-card">
+          <span class="ability-title">STRENGTH</span>
+          <div class="ability-score-wrap">
+            <input class="ability-score" type="text" maxlength="2">
+            <span class="ability-mod"></span>
           </div>
         </div>
-        <div class="ability-box">
-          <div class="ability-title">DEXTERITY</div>
-          <div class="ability-score-row">
-            <input class="ability-score" type="text" maxlength="3">
-            <span class="ability-sub"> </span>
+        <div class="ability-card">
+          <span class="ability-title">DEXTERITY</span>
+          <div class="ability-score-wrap">
+            <input class="ability-score" type="text" maxlength="2">
+            <span class="ability-mod"></span>
           </div>
         </div>
-        <div class="ability-box">
-          <div class="ability-title">CONSTITUTION</div>
-          <div class="ability-score-row">
-            <input class="ability-score" type="text" maxlength="3">
-            <span class="ability-sub"> </span>
+        <div class="ability-card">
+          <span class="ability-title">CONSTITUTION</span>
+          <div class="ability-score-wrap">
+            <input class="ability-score" type="text" maxlength="2">
+            <span class="ability-mod"></span>
           </div>
         </div>
-        <div class="ability-box">
-          <div class="ability-title">INTELLIGENCE</div>
-          <div class="ability-score-row">
-            <input class="ability-score" type="text" maxlength="3">
-            <span class="ability-sub"> </span>
+        <div class="ability-card">
+          <span class="ability-title">INTELLIGENCE</span>
+          <div class="ability-score-wrap">
+            <input class="ability-score" type="text" maxlength="2">
+            <span class="ability-mod"></span>
           </div>
         </div>
-        <div class="ability-box">
-          <div class="ability-title">WISDOM</div>
-          <div class="ability-score-row">
-            <input class="ability-score" type="text" maxlength="3">
-            <span class="ability-sub"> </span>
+        <div class="ability-card">
+          <span class="ability-title">WISDOM</span>
+          <div class="ability-score-wrap">
+            <input class="ability-score" type="text" maxlength="2">
+            <span class="ability-mod"></span>
           </div>
         </div>
-        <div class="ability-box">
-          <div class="ability-title">CHARISMA</div>
-          <div class="ability-score-row">
-            <input class="ability-score" type="text" maxlength="3">
-            <span class="ability-sub"> </span>
+        <div class="ability-card">
+          <span class="ability-title">CHARISMA</span>
+          <div class="ability-score-wrap">
+            <input class="ability-score" type="text" maxlength="2">
+            <span class="ability-mod"></span>
           </div>
         </div>
-        <div class="savingthrows-box">
-          <div class="savingthrows-title">SAVING THROWS</div>
-          <ul class="savingthrows-list">
+        <div class="savingthrows-card">
+          <div class="card-title">SAVING THROWS</div>
+          <ul class="savingthrow-list">
             <li><input type="checkbox"> Strength</li>
             <li><input type="checkbox"> Dexterity</li>
             <li><input type="checkbox"> Constitution</li>
@@ -748,8 +561,8 @@
             <li><input type="checkbox"> Charisma</li>
           </ul>
         </div>
-        <div class="skills-box">
-          <div class="skills-title">SKILLS</div>
+        <div class="skills-card">
+          <div class="card-title">SKILLS</div>
           <ul class="skills-list">
             <li><input type="checkbox"> Acrobatics (DEX)</li>
             <li><input type="checkbox"> Animal Handling (WIS)</li>
@@ -772,97 +585,108 @@
           </ul>
         </div>
       </div>
-      <!-- Center Column 1: Initiative/AC/Defenses/Proficiency/Speed -->
-      <div class="center1-top">
-        <div class="initiative-box">
-          <span class="initiative-label">INITIATIVE</span>
-          <input class="initiative-input" type="text" maxlength="3">
+      <!-- Initiative, AC, Defenses, Proficiency, Speed -->
+      <div class="block" style="grid-row: 1; grid-column: 2;">
+        <div class="row-flex">
+          <div>
+            <div class="block-title">INITIATIVE</div>
+            <input class="initiative-input" type="text" maxlength="3">
+          </div>
+          <div>
+            <div class="block-title">ARMOR CLASS</div>
+            <input class="ac-input" type="text" maxlength="3">
+          </div>
         </div>
-        <div class="ac-box">
-          <span class="ac-label">ARMOR CLASS</span>
-          <input class="ac-input" type="text" maxlength="3">
-        </div>
-        <div class="defenses-box" style="grid-column: 1 / span 2;">
-          <input type="text" style="width:98%;border:none;background:none;font-size:1em;outline:none;" placeholder="Defenses, Resistances, Immunities...">
-        </div>
-        <div class="proficiency-box">
-          <span class="proficiency-label">PROFICIENCY BONUS</span>
-          <input class="proficiency-input" type="text" maxlength="3">
-        </div>
-        <div class="speed-box">
-          <span class="speed-label">SPEED</span>
-          <input class="speed-input" type="text" maxlength="10">
+        <div style="margin-top: 8px;">
+          <div class="block-title">DEFENSES / RESISTANCES / IMMUNITIES</div>
+          <input class="defenses-input" type="text" placeholder="e.g. Fire, Necrotic, Poison" />
         </div>
       </div>
-      <!-- Center Column 2: HP, Hit Dice, Death Saves, Proficiencies -->
-      <div class="center2-top">
-        <div class="hp-box">
-          <span class="hp-label">HIT POINTS</span>
+      <div class="block" style="grid-row: 1; grid-column: 3;">
+        <div class="row-flex">
+          <div>
+            <div class="block-title">PROFICIENCY BONUS</div>
+            <input class="proficiency-input" type="text" maxlength="3">
+          </div>
+          <div>
+            <div class="block-title">SPEED</div>
+            <input class="speed-input" type="text" maxlength="10">
+          </div>
+        </div>
+        <div style="margin-top: 8px;">
+          <div class="block-title">SENSES</div>
+          <div style="font-size:0.98em;">
+            Passive Wisdom (Perception): <input type="text" style="width:34px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;">
+            <br>
+            Passive Wisdom (Insight): <input type="text" style="width:34px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;">
+            <br>
+            Passive Intelligence (Investigation): <input type="text" style="width:34px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;">
+            <br>
+            Darkvision: <input type="text" style="width:40px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;"> ft.
+          </div>
+        </div>
+      </div>
+      <!-- HP, Hit Dice, Death Saves, Proficiencies -->
+      <div class="block" style="grid-row: 1; grid-column: 4;">
+        <div>
+          <div class="block-title">HIT POINTS</div>
           <div class="hp-row">
             <input class="hp-input" type="text" maxlength="5" placeholder="Max HP">
             <input class="temp-hp-input" type="text" maxlength="5" placeholder="Temp">
           </div>
         </div>
-        <div class="hitdice-box">
-          <span class="hitdice-label">HIT DICE</span>
+        <div>
+          <div class="block-title">HIT DICE</div>
           <input class="hitdice-input" type="text" maxlength="12">
         </div>
-        <div class="deathsaves-box">
-          <span class="deathsaves-label">DEATH SAVES</span>
+        <div>
+          <div class="block-title">DEATH SAVES</div>
           <div class="death-row">
-            <span>Successes</span>
+            <span class="death-label">Successes</span>
             <span class="death-circle" onclick="toggleDeathSave(this)"></span>
             <span class="death-circle" onclick="toggleDeathSave(this)"></span>
             <span class="death-circle" onclick="toggleDeathSave(this)"></span>
-            <span>Failures</span>
+            <span class="death-label" style="margin-left:4px;">Failures</span>
             <span class="death-circle" onclick="toggleDeathSave(this)"></span>
             <span class="death-circle" onclick="toggleDeathSave(this)"></span>
             <span class="death-circle" onclick="toggleDeathSave(this)"></span>
           </div>
         </div>
-        <div class="proficiencies-box">
-          <textarea style="width:99%;border:none;background:none;font-size:1em;font-family:inherit;resize:vertical;min-height:32px;outline:none;" placeholder="Proficiencies & Languages"></textarea>
+        <div>
+          <div class="block-title">PROFICIENCIES & LANGUAGES</div>
+          <textarea class="proficiencies-box" rows="2"></textarea>
         </div>
       </div>
-      <!-- Senses (bottom left) -->
-      <div class="senses-box">
-        <div class="senses-title">SENSES</div>
-        <ul class="senses-list">
-          <li>Passive Wisdom (Perception): <input type="text" style="width:30px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;"></li>
-          <li>Passive Wisdom (Insight): <input type="text" style="width:30px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;"></li>
-          <li>Passive Intelligence (Investigation): <input type="text" style="width:30px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;"></li>
-          <li>Darkvision: <input type="text" style="width:40px;text-align:center;border:1px solid #b5bedc;border-radius:4px;font-size:0.99em;"> ft.</li>
-        </ul>
-      </div>
-      <!-- Weapon Attacks & Cantrips (bottom center) -->
-      <div class="attacks-box">
-        <div class="attacks-title">WEAPON ATTACKS &amp; CANTRIPS</div>
-        <table class="attacks-table">
-          <thead>
-            <tr>
-              <th>Attack / Spell</th>
-              <th>Bonus</th>
-              <th>Damage / Type</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- Actions & Bonus Actions (bottom right) -->
-      <div class="actions-box">
-        <div>
-          <div class="actions-title">ACTIONS</div>
-          <textarea class="actions-area" placeholder="Standard Actions, Extra Attack, etc."></textarea>
+      <!-- Attacks/Cantrips + Actions/Bonus Actions -->
+      <div class="attacks-block">
+        <div class="attacks-card">
+          <div class="attacks-title">WEAPON ATTACKS &amp; CANTRIPS</div>
+          <table class="attacks-table">
+            <thead>
+              <tr>
+                <th>Attack / Spell</th>
+                <th>Bonus</th>
+                <th>Damage / Type</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+            </tbody>
+          </table>
         </div>
-        <div>
-          <div class="actions-title">BONUS ACTIONS</div>
-          <textarea class="bonusactions-area" placeholder="Bonus Actions, Features, etc."></textarea>
+        <div class="actions-card">
+          <div>
+            <div class="actions-title">ACTIONS</div>
+            <textarea class="actions-area" placeholder="Standard Actions, Extra Attack, etc."></textarea>
+          </div>
+          <div>
+            <div class="actions-title">BONUS ACTIONS</div>
+            <textarea class="bonusactions-area" placeholder="Bonus Actions, Features, etc."></textarea>
+          </div>
         </div>
       </div>
     </div>
