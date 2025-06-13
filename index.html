@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>D&D 5e Character Sheet - Pixel-Perfect Overlay</title>
-  <meta name="viewport" content="width=750">
+  <title>D&D 5e Character Sheet Overlay DEMO</title>
+  <meta name="viewport" content="width=715">
   <style>
     body {
       background: #222;
@@ -39,30 +39,21 @@
     }
     input, textarea {
       position: absolute;
-      border: none;
       background: transparent;
+      border: none;
       font-family: 'Segoe UI', Arial, sans-serif;
-      font-size: 15px;
-      color: #222;
+      font-size: 16px;
+      color: #111;
       box-sizing: border-box;
-      padding: 0 4px;
-      resize: none;
+      padding: 1px 5px;
       outline: none;
       pointer-events: auto;
       transition: background 0.15s, border 0.15s;
     }
     input:focus, textarea:focus {
       background: rgba(255,255,200,0.35);
-      border: 1.5px solid #2976d2;
+      border: 1.2px solid #2976d2;
       border-radius: 4px;
-    }
-    input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      background: transparent;
-      border: none;
-      accent-color: #2976d2;
-      pointer-events: auto;
     }
   </style>
 </head>
@@ -70,97 +61,11 @@
   <div class="sheet-container">
     <img src="images/5E_CharacterSheet_Fillable-1.png" alt="D&D 5E Sheet 1" class="sheet-bg" width="715" height="878">
     <form class="fields" autocomplete="off">
-
-      <!-- Banner -->
-      <input style="top:36px;left:40px;width:170px;height:26px;">
-      <input style="top:36px;left:239px;width:109px;height:26px;">
-      <input style="top:36px;left:355px;width:109px;height:26px;">
-      <input style="top:36px;left:471px;width:137px;height:26px;">
-      <input style="top:65px;left:40px;width:170px;height:26px;">
-      <input style="top:65px;left:239px;width:109px;height:26px;">
-      <input style="top:65px;left:355px;width:109px;height:26px;">
-      <input style="top:65px;left:471px;width:137px;height:26px;">
-
-      <!-- Abilities -->
-      <input style="top:120px;left:49px;width:46px;height:38px;text-align:center;font-size:20px;">
-      <input style="top:170px;left:49px;width:46px;height:38px;text-align:center;font-size:20px;">
-      <input style="top:220px;left:49px;width:46px;height:38px;text-align:center;font-size:20px;">
-      <input style="top:270px;left:49px;width:46px;height:38px;text-align:center;font-size:20px;">
-      <input style="top:320px;left:49px;width:46px;height:38px;text-align:center;font-size:20px;">
-      <input style="top:370px;left:49px;width:46px;height:38px;text-align:center;font-size:20px;">
-
-      <!-- Inspiration/Proficiency -->
-      <input style="top:120px;left:112px;width:70px;height:22px;">
-      <input style="top:150px;left:112px;width:70px;height:22px;">
-
-      <!-- Saving Throws (checkboxes) -->
-      <input type="checkbox" style="top:187px;left:116px;">
-      <input type="checkbox" style="top:203px;left:116px;">
-      <input type="checkbox" style="top:219px;left:116px;">
-      <input type="checkbox" style="top:235px;left:116px;">
-      <input type="checkbox" style="top:251px;left:116px;">
-      <input type="checkbox" style="top:267px;left:116px;">
-
-      <!-- Skills (checkboxes) -->
-      <input type="checkbox" style="top:305px;left:116px;">
-      <input type="checkbox" style="top:320px;left:116px;">
-      <input type="checkbox" style="top:335px;left:116px;">
-      <input type="checkbox" style="top:350px;left:116px;">
-      <input type="checkbox" style="top:365px;left:116px;">
-      <input type="checkbox" style="top:380px;left:116px;">
-      <input type="checkbox" style="top:395px;left:116px;">
-      <input type="checkbox" style="top:410px;left:116px;">
-      <input type="checkbox" style="top:425px;left:116px;">
-      <input type="checkbox" style="top:440px;left:116px;">
-      <input type="checkbox" style="top:455px;left:116px;">
-      <input type="checkbox" style="top:470px;left:116px;">
-      <input type="checkbox" style="top:485px;left:116px;">
-      <input type="checkbox" style="top:500px;left:116px;">
-      <input type="checkbox" style="top:515px;left:116px;">
-      <input type="checkbox" style="top:530px;left:116px;">
-      <input type="checkbox" style="top:545px;left:116px;">
-      <input type="checkbox" style="top:560px;left:116px;">
-
-      <!-- Passive Perception -->
-      <input style="top:585px;left:34px;width:176px;height:22px;">
-
-      <!-- Other Proficiencies & Languages -->
-      <textarea style="top:613px;left:34px;width:176px;height:60px;"></textarea>
-
-      <!-- AC, Initiative, Speed -->
-      <input style="top:120px;left:220px;width:44px;height:36px;text-align:center;font-size:18px;">
-      <input style="top:120px;left:270px;width:44px;height:36px;text-align:center;font-size:18px;">
-      <input style="top:120px;left:320px;width:44px;height:36px;text-align:center;font-size:18px;">
-
-      <!-- HP Max, Current/Temp HP -->
-      <input style="top:170px;left:220px;width:144px;height:22px;">
-      <input style="top:197px;left:220px;width:144px;height:22px;">
-      <input style="top:224px;left:220px;width:144px;height:22px;">
-
-      <!-- Hit Dice -->
-      <input style="top:251px;left:220px;width:70px;height:22px;">
-      <!-- Death Saves (checkboxes) -->
-      <input type="checkbox" style="top:252px;left:300px;">
-      <input type="checkbox" style="top:252px;left:320px;">
-      <input type="checkbox" style="top:252px;left:340px;">
-      <input type="checkbox" style="top:252px;left:390px;">
-      <input type="checkbox" style="top:252px;left:410px;">
-      <input type="checkbox" style="top:252px;left:430px;">
-
-      <!-- Attacks & Spellcasting -->
-      <textarea style="top:280px;left:220px;width:225px;height:80px;"></textarea>
-
-      <!-- Equipment -->
-      <textarea style="top:370px;left:220px;width:225px;height:90px;"></textarea>
-
-      <!-- Personality, Ideals, Bonds, Flaws -->
-      <textarea style="top:120px;left:470px;width:205px;height:35px;"></textarea>
-      <textarea style="top:165px;left:470px;width:205px;height:35px;"></textarea>
-      <textarea style="top:210px;left:470px;width:205px;height:35px;"></textarea>
-      <textarea style="top:255px;left:470px;width:205px;height:35px;"></textarea>
-
-      <!-- Features & Traits -->
-      <textarea style="top:305px;left:470px;width:205px;height:155px;"></textarea>
+      <!-- Banner row: Character Name, Class & Level, Background, Player Name -->
+      <input style="top:38px; left:38px; width:190px; height:29px;">
+      <input style="top:38px; left:238px; width:110px; height:29px;">
+      <input style="top:38px; left:353px; width:110px; height:29px;">
+      <input style="top:38px; left:471px; width:200px; height:29px;">
     </form>
   </div>
 </body>
