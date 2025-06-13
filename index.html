@@ -2,36 +2,337 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>D&D 5e Character Sheet PDF</title>
+  <title>D&D 5e Character Sheet (HTML Editable)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+      --border: #333;
+      --label: #4d2e19;
+      --bg: #f9f6f2;
+      --input-bg: #fff;
+      --accent: #c6a664;
+      --section-bg: #eee7da;
+    }
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
-      background: #232325;
+      background: var(--bg);
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      color: #222;
+      min-height: 100%;
     }
-    body {
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
+    .sheet-container {
+      max-width: 900px;
+      margin: 16px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 32px #0002;
+      border: 2px solid var(--border);
+      padding: 24px;
     }
-    .pdf-fullscreen {
-      position: absolute;
-      left: 0; top: 0;
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      background: #232325;
-      margin: 0; padding: 0;
+    .sheet-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 32px;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .sheet-header .field-group {
+      flex: 1 1 200px;
+      min-width: 150px;
+    }
+    .field-group label {
       display: block;
+      font-size: 0.98em;
+      color: var(--label);
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
+    .field-group input, .field-group textarea, .ability-score input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 8px;
+      background: var(--input-bg);
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+    .abilities-section {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .ability-score {
+      background: var(--section-bg);
+      border: 1.5px solid var(--accent);
+      border-radius: 7px;
+      width: 110px;
+      text-align: center;
+      padding: 10px 6px 12px 6px;
+      margin-bottom: 4px;
+      box-shadow: 0 2px 12px #0001;
+    }
+    .ability-score label {
+      font-size: 1.05em;
+      color: var(--label);
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+      letter-spacing: 1px;
+    }
+    .ability-score input[type="number"] {
+      font-size: 1.4em;
+      font-weight: bold;
+      text-align: center;
+      width: 50px;
+      margin: 0 auto 4px auto;
+      display: block;
+    }
+    .ability-score .mod {
+      font-size: 1.1em;
+      margin-bottom: 2px;
+      color: #444;
+      font-weight: 500;
+      display: block;
+    }
+    .skills-section {
+      background: var(--section-bg);
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .skills-section h2 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.15em;
+      color: var(--label);
+      letter-spacing: 1px;
+    }
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .skill-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .skill-row label {
+      flex: 1;
+      font-size: 0.95em;
+      color: #444;
+      font-weight: 500;
+    }
+    .skill-row input[type="number"] {
+      width: 38px;
+      text-align: center;
+      font-size: 1em;
+      border-radius: 4px;
+      border: 1px solid #999;
+      margin-right: 2px;
+    }
+    .proficiency {
+      width: 16px;
+      height: 16px;
+      margin-right: 3px;
+    }
+    @media (max-width: 700px) {
+      .sheet-container {
+        padding: 5vw 2vw;
+      }
+      .sheet-header {
+        gap: 8px 0;
+      }
+      .abilities-section {
+        gap: 6px;
+      }
+      .skills-section {
+        padding: 8px 4vw;
+      }
     }
   </style>
 </head>
 <body>
-  <iframe
-    class="pdf-fullscreen"
-    src="https://media.dndbeyond.com/compendium-images/marketing/dnd_5e_charactersheet_formfillable.pdf">
-  </iframe>
+  <form class="sheet-container" autocomplete="off">
+    <div class="sheet-header">
+      <div class="field-group">
+        <label for="charname">Character Name</label>
+        <input id="charname" name="charname" type="text" maxlength="40" />
+      </div>
+      <div class="field-group">
+        <label for="classlevel">Class & Level</label>
+        <input id="classlevel" name="classlevel" type="text" maxlength="24" />
+      </div>
+      <div class="field-group">
+        <label for="background">Background</label>
+        <input id="background" name="background" type="text" maxlength="24" />
+      </div>
+      <div class="field-group">
+        <label for="playername">Player Name</label>
+        <input id="playername" name="playername" type="text" maxlength="24" />
+      </div>
+      <div class="field-group">
+        <label for="race">Race</label>
+        <input id="race" name="race" type="text" maxlength="24" />
+      </div>
+      <div class="field-group">
+        <label for="alignment">Alignment</label>
+        <input id="alignment" name="alignment" type="text" maxlength="24" />
+      </div>
+      <div class="field-group">
+        <label for="xp">Experience Points</label>
+        <input id="xp" name="xp" type="number" min="0" step="1" />
+      </div>
+    </div>
+
+    <div class="abilities-section">
+      <div class="ability-score">
+        <label for="str">Strength</label>
+        <input id="str" name="str" type="number" min="1" max="30" />
+        <span class="mod">Mod: <input type="number" name="strmod" style="width:32px;" /></span>
+      </div>
+      <div class="ability-score">
+        <label for="dex">Dexterity</label>
+        <input id="dex" name="dex" type="number" min="1" max="30" />
+        <span class="mod">Mod: <input type="number" name="dexmod" style="width:32px;" /></span>
+      </div>
+      <div class="ability-score">
+        <label for="con">Constitution</label>
+        <input id="con" name="con" type="number" min="1" max="30" />
+        <span class="mod">Mod: <input type="number" name="conmod" style="width:32px;" /></span>
+      </div>
+      <div class="ability-score">
+        <label for="int">Intelligence</label>
+        <input id="int" name="int" type="number" min="1" max="30" />
+        <span class="mod">Mod: <input type="number" name="intmod" style="width:32px;" /></span>
+      </div>
+      <div class="ability-score">
+        <label for="wis">Wisdom</label>
+        <input id="wis" name="wis" type="number" min="1" max="30" />
+        <span class="mod">Mod: <input type="number" name="wismod" style="width:32px;" /></span>
+      </div>
+      <div class="ability-score">
+        <label for="cha">Charisma</label>
+        <input id="cha" name="cha" type="number" min="1" max="30" />
+        <span class="mod">Mod: <input type="number" name="chamod" style="width:32px;" /></span>
+      </div>
+    </div>
+
+    <div class="skills-section">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="acrobatics_prof" />
+          <label for="acrobatics_prof">Acrobatics (Dex)</label>
+          <input type="number" step="1" name="acrobatics" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="animal_prof" />
+          <label for="animal_prof">Animal Handling (Wis)</label>
+          <input type="number" step="1" name="animal" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="arcana_prof" />
+          <label for="arcana_prof">Arcana (Int)</label>
+          <input type="number" step="1" name="arcana" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="athletics_prof" />
+          <label for="athletics_prof">Athletics (Str)</label>
+          <input type="number" step="1" name="athletics" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="deception_prof" />
+          <label for="deception_prof">Deception (Cha)</label>
+          <input type="number" step="1" name="deception" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="history_prof" />
+          <label for="history_prof">History (Int)</label>
+          <input type="number" step="1" name="history" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="insight_prof" />
+          <label for="insight_prof">Insight (Wis)</label>
+          <input type="number" step="1" name="insight" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="intimidation_prof" />
+          <label for="intimidation_prof">Intimidation (Cha)</label>
+          <input type="number" step="1" name="intimidation" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="investigation_prof" />
+          <label for="investigation_prof">Investigation (Int)</label>
+          <input type="number" step="1" name="investigation" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="medicine_prof" />
+          <label for="medicine_prof">Medicine (Wis)</label>
+          <input type="number" step="1" name="medicine" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="nature_prof" />
+          <label for="nature_prof">Nature (Int)</label>
+          <input type="number" step="1" name="nature" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="perception_prof" />
+          <label for="perception_prof">Perception (Wis)</label>
+          <input type="number" step="1" name="perception" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="performance_prof" />
+          <label for="performance_prof">Performance (Cha)</label>
+          <input type="number" step="1" name="performance" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="persuasion_prof" />
+          <label for="persuasion_prof">Persuasion (Cha)</label>
+          <input type="number" step="1" name="persuasion" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="religion_prof" />
+          <label for="religion_prof">Religion (Int)</label>
+          <input type="number" step="1" name="religion" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="sleight_prof" />
+          <label for="sleight_prof">Sleight of Hand (Dex)</label>
+          <input type="number" step="1" name="sleight" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="stealth_prof" />
+          <label for="stealth_prof">Stealth (Dex)</label>
+          <input type="number" step="1" name="stealth" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="survival_prof" />
+          <label for="survival_prof">Survival (Wis)</label>
+          <input type="number" step="1" name="survival" />
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:18px;">
+      <label for="features" style="color:var(--label); font-weight:600;">Features & Traits</label>
+      <textarea id="features" name="features" rows="5" style="width:100%;border-radius:6px;border:1px solid #bbb;background:#faf6f1;"></textarea>
+    </div>
+    <div>
+      <label for="equipment" style="color:var(--label); font-weight:600;">Equipment</label>
+      <textarea id="equipment" name="equipment" rows="5" style="width:100%;border-radius:6px;border:1px solid #bbb;background:#faf6f1;"></textarea>
+    </div>
+    <p style="margin-top:32px;color:#999;font-size:0.93em;">
+      Basic D&D 5e HTML character sheet. Ask for more sections (like HP, spells, attacks, etc.) or features (save, print, etc.)!
+    </p>
+  </form>
 </body>
 </html>
