@@ -6,174 +6,83 @@
   <title>D&D Character Sheet</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       font-family: 'Garamond', serif;
       background: #f0e6d2;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-      color: #2b2b2b;
     }
-
-    h1 {
-      font-family: 'Georgia', serif;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
+    .sheet {
+      position: relative;
+      width: 1000px;
+      height: 1415px;
+      background: url('D&DCharacterSheet.jpeg') no-repeat center top;
+      background-size: contain;
+      margin: 0 auto;
     }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 2fr 3fr;
-      gap: 2rem;
-    }
-
-    .left-panel, .right-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .box {
-      background: #fffaf0;
-      border: 2px solid #c1a265;
-      border-radius: 12px;
-      padding: 1rem;
-      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 0.25rem;
-      font-size: 0.9rem;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 0.5rem;
-      border-radius: 10px;
-      border: 1px solid #a38b65;
-      box-sizing: border-box;
-      background-color: #fffdf5;
-      font-size: 1rem;
+    .field {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.7);
+      border: none;
       font-family: 'Garamond', serif;
-      margin-bottom: 0.5rem;
+      font-size: 14px;
+      padding: 4px;
+      border-radius: 4px;
     }
-
-    input:focus, textarea:focus {
+    .field:focus {
       outline: 2px solid #d6b374;
       background-color: #fffbe6;
-    }
-
-    textarea {
-      height: 80px;
-      resize: vertical;
     }
   </style>
 </head>
 <body>
-  <h1>D&D Character Sheet</h1>
-  <div class="grid">
-    <div class="left-panel">
-      <div class="box">
-        <label>Character Name<input id="charName"></label>
-        <label>Class & Level<input id="charClassLevel"></label>
-        <label>Background<input id="charBackground"></label>
-        <label>Player Name<input id="playerName"></label>
-        <label>Race<input id="charRace"></label>
-        <label>Alignment<input id="charAlignment"></label>
-        <label>Age<input id="charAge" type="number"></label>
-        <label>Height<input id="charHeight"></label>
-      </div>
+  <div class="sheet">
+    <!-- Character Name -->
+    <input class="field" id="charName" style="top: 40px; left: 630px; width: 300px;" placeholder="Character Name">
 
-      <div class="box">
-        <label>Proficiency Bonus<input id="proficiencyBonus"></label>
-        <label>Inspiration<input id="inspiration"></label>
-      </div>
+    <!-- Class -->
+    <input class="field" id="charClass" style="top: 105px; left: 330px; width: 140px;" placeholder="Class">
 
-      <div class="box">
-        <label>Strength<input id="str"></label>
-        <label>Strength Mod<input id="strMod"></label>
-        <label>Saving Throws<input id="saveStr"></label>
-        <label>Skills<input id="skillsStr"></label>
-      </div>
+    <!-- Background -->
+    <input class="field" id="charBackground" style="top: 105px; left: 475px; width: 140px;" placeholder="Background">
 
-      <div class="box">
-        <label>Dexterity<input id="dex"></label>
-        <label>Dex Mod<input id="dexMod"></label>
-        <label>Saving Throws<input id="saveDex"></label>
-        <label>Skills<input id="skillsDex"></label>
-      </div>
+    <!-- Player Name -->
+    <input class="field" id="playerName" style="top: 105px; left: 620px; width: 160px;" placeholder="Player Name">
 
-      <div class="box">
-        <label>Constitution<input id="con"></label>
-        <label>Con Mod<input id="conMod"></label>
-        <label>Saving Throws<input id="saveCon"></label>
-      </div>
+    <!-- Race -->
+    <input class="field" id="charRace" style="top: 135px; left: 330px; width: 140px;" placeholder="Race">
 
-      <div class="box">
-        <label>Intelligence<input id="int"></label>
-        <label>Int Mod<input id="intMod"></label>
-        <label>Saving Throws<input id="saveInt"></label>
-        <label>Skills<input id="skillsInt"></label>
-      </div>
+    <!-- Alignment -->
+    <input class="field" id="charAlignment" style="top: 135px; left: 475px; width: 140px;" placeholder="Alignment">
 
-      <div class="box">
-        <label>Wisdom<input id="wis"></label>
-        <label>Wis Mod<input id="wisMod"></label>
-        <label>Saving Throws<input id="saveWis"></label>
-        <label>Skills<input id="skillsWis"></label>
-      </div>
+    <!-- Age -->
+    <input class="field" id="charAge" style="top: 135px; left: 620px; width: 50px;" placeholder="Age">
 
-      <div class="box">
-        <label>Charisma<input id="cha"></label>
-        <label>Cha Mod<input id="chaMod"></label>
-        <label>Saving Throws<input id="saveCha"></label>
-        <label>Skills<input id="skillsCha"></label>
-      </div>
+    <!-- Height -->
+    <input class="field" id="charHeight" style="top: 135px; left: 675px; width: 50px;" placeholder="Height">
 
-      <div class="box">
-        <label>Other Proficiencies & Languages</label>
-        <textarea id="proficiencies"></textarea>
-      </div>
-    </div>
+    <!-- Armor Class -->
+    <input class="field" id="ac" style="top: 280px; left: 460px; width: 60px;" placeholder="AC">
 
-    <div class="right-panel">
-      <div class="box">
-        <label>Armor Class<input id="ac"></label>
-        <label>Initiative<input id="initiative"></label>
-        <label>Speed<input id="speed"></label>
-      </div>
+    <!-- Initiative -->
+    <input class="field" id="initiative" style="top: 280px; left: 530px; width: 60px;" placeholder="Init">
 
-      <div class="box">
-        <label>Max HP<input id="maxHP"></label>
-        <label>Current HP<input id="currentHP"></label>
-        <label>Temp HP<input id="tempHP"></label>
-        <label>Hit Dice<input id="hitDice"></label>
-        <label>Death Saves (Successes)<input id="deathSavesSuccess"></label>
-        <label>Death Saves (Failures)<input id="deathSavesFail"></label>
-      </div>
+    <!-- Speed -->
+    <input class="field" id="speed" style="top: 280px; left: 600px; width: 60px;" placeholder="Speed">
 
-      <div class="box">
-        <label>Personality Traits</label>
-        <textarea id="personality"></textarea>
-      </div>
+    <!-- Current HP -->
+    <input class="field" id="currentHP" style="top: 345px; left: 460px; width: 200px;" placeholder="Current HP">
 
-      <div class="box">
-        <label>Features & Traits</label>
-        <textarea id="features"></textarea>
-      </div>
+    <!-- Personality -->
+    <textarea class="field" id="personality" style="top: 240px; left: 680px; width: 280px; height: 120px;" placeholder="Personality"></textarea>
 
-      <div class="box">
-        <label>Attacks & Spellcasting</label>
-        <textarea id="attacks"></textarea>
-      </div>
+    <!-- Features -->
+    <textarea class="field" id="features" style="top: 370px; left: 680px; width: 280px; height: 130px;" placeholder="Features"></textarea>
 
-      <div class="box">
-        <label>Equipment & Inventory</label>
-        <textarea id="inventory"></textarea>
-      </div>
-    </div>
+    <!-- Attacks & Spellcasting -->
+    <textarea class="field" id="attacks" style="top: 510px; left: 430px; width: 530px; height: 100px;" placeholder="Attacks & Spellcasting"></textarea>
+
+    <!-- Equipment & Inventory -->
+    <textarea class="field" id="inventory" style="top: 620px; left: 430px; width: 530px; height: 100px;" placeholder="Equipment & Inventory"></textarea>
   </div>
 </body>
 </html>
