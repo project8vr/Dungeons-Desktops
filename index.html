@@ -2,268 +2,183 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>D&D 5e Editable Character Sheet - 3 Pages</title>
-  <meta name="viewport" content="width=1024">
+  <title>D&D 5e Character Sheet (Pixel-Perfect Overlays)</title>
+  <meta name="viewport" content="width=800">
   <style>
-    body {
-      margin: 0;
-      background: #232325;
-      font-family: 'Segoe UI', Arial, sans-serif;
-    }
-    .sheet-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 0 32px 0;
-    }
-    .sheet-img-container {
+    body { background: #292929; margin: 0; }
+    .container {
       position: relative;
-      margin-bottom: 48px;
+      width: 816px; /* 768px image + 2*24px margin for easier editing */
+      margin: 40px auto;
       background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 32px #0007;
-      width: 768px;
-      height: 994px;
-      max-width: 98vw;
-      overflow: hidden;
+      box-shadow: 0 10px 40px #0006;
+      border-radius: 12px;
+      overflow: visible;
     }
-    .sheet-img {
+    .sheet-bg {
+      display: block;
       width: 768px;
       height: 994px;
-      display: block;
+      margin: 0 auto;
+      background: #fff;
       user-select: none;
       pointer-events: none;
-      position: absolute;
-      left: 0; top: 0;
-      z-index: 0;
     }
-    .sheet-fields {
+    .fields {
+      pointer-events: none;
       position: absolute;
-      left: 0;
       top: 0;
+      left: 24px; /* Center fields over the image */
       width: 768px;
       height: 994px;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .charfield, .chartextarea, .charcheckbox {
-      position: absolute;
-      background: rgba(255,255,255,0.7);
-      border: 1.5px solid #888;
-      border-radius: 5px;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      font-size: 1em;
-      color: #181818;
-      padding: 2px 6px;
-      box-sizing: border-box;
-      outline: none;
-      pointer-events: auto;
-      transition: border 0.2s;
-    }
-    .charfield:focus, .chartextarea:focus {
-      border: 2.5px solid #004aad;
-      background: #fff;
-    }
-    .charfield { height: 23px; }
-    .chartextarea { resize: none; }
-    .charcheckbox {
-      background: transparent;
-      border: none;
-      width: 18px; height: 18px;
-      margin: 0;
-      padding: 0;
-      accent-color: #222;
-    }
-    .label-hint {
-      position: absolute;
-      font-size: 0.80em;
-      color: #555;
-      pointer-events: none;
       z-index: 2;
     }
-    /* Responsive */
-    @media (max-width: 800px) {
-      .sheet-img-container, .sheet-fields {
-        width: 98vw !important;
-        min-width: 0 !important;
-        max-width: 100vw !important;
-      }
-      .sheet-img {
-        width: 98vw !important;
-        max-width: 100vw !important;
-        height: auto;
-      }
+    input, textarea, select {
+      position: absolute;
+      background: rgba(255,255,255,0.8);
+      border: 1.2px solid #444;
+      border-radius: 4px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 15px;
+      color: #222;
+      box-sizing: border-box;
+      padding: 2px 6px;
+      resize: none;
+      outline: none;
+      pointer-events: auto;
+    }
+    input[type="checkbox"] {
+      background: transparent;
+      width: 18px; height: 18px;
+      border: none;
+      accent-color: #222;
+      padding: 0;
+    }
+    input:focus, textarea:focus {
+      border: 2px solid #1976d2;
+      background: #fff;
     }
   </style>
 </head>
 <body>
-  <div class="sheet-wrapper">
+  <div class="container">
+    <img src="images/5E_CharacterSheet_Fillable-1.png" alt="D&D 5E Sheet 1" class="sheet-bg" width="768" height="994">
+    <form class="fields" autocomplete="off">
+      <!-- Top Banner -->
+      <input style="top:52px; left:48px; width:237px; height:28px;" placeholder="Character Name">
+      <input style="top:52px; left:302px; width:112px; height:28px;" placeholder="Class & Level">
+      <input style="top:52px; left:422px; width:112px; height:28px;" placeholder="Background">
+      <input style="top:52px; left:545px; width:175px; height:28px;" placeholder="Player Name">
+      <input style="top:82px; left:48px; width:237px; height:28px;" placeholder="Race">
+      <input style="top:82px; left:302px; width:112px; height:28px;" placeholder="Alignment">
+      <input style="top:82px; left:422px; width:112px; height:28px;" placeholder="Experience Points">
 
-    <!-- PAGE 1 -->
-    <div class="sheet-img-container" style="height:994px;">
-      <img src="images/5E_CharacterSheet_Fillable-1.png" alt="Character Sheet Page 1" class="sheet-img">
-      <div class="sheet-fields">
-        <!-- Banner Fields -->
-        <input class="charfield" style="top:84px;left:76px;width:263px;" placeholder="Character Name">
-        <input class="charfield" style="top:56px;left:370px;width:110px;" placeholder="Class & Level">
-        <input class="charfield" style="top:56px;left:487px;width:110px;" placeholder="Background">
-        <input class="charfield" style="top:56px;left:606px;width:86px;" placeholder="Player Name">
-        <input class="charfield" style="top:84px;left:370px;width:110px;" placeholder="Race">
-        <input class="charfield" style="top:84px;left:487px;width:110px;" placeholder="Alignment">
-        <input class="charfield" style="top:84px;left:606px;width:86px;" placeholder="Experience Points">
+      <!-- Abilities -->
+      <input style="top:136px; left:49px; width:55px; height:46px; text-align:center; font-size:22px;" maxlength="2" placeholder="STR">
+      <input style="top:214px; left:49px; width:55px; height:46px; text-align:center; font-size:22px;" maxlength="2" placeholder="DEX">
+      <input style="top:292px; left:49px; width:55px; height:46px; text-align:center; font-size:22px;" maxlength="2" placeholder="CON">
+      <input style="top:370px; left:49px; width:55px; height:46px; text-align:center; font-size:22px;" maxlength="2" placeholder="INT">
+      <input style="top:448px; left:49px; width:55px; height:46px; text-align:center; font-size:22px;" maxlength="2" placeholder="WIS">
+      <input style="top:526px; left:49px; width:55px; height:46px; text-align:center; font-size:22px;" maxlength="2" placeholder="CHA">
 
-        <!-- Ability Scores -->
-        <input class="charfield" style="top:140px;left:54px;width:64px;text-align:center;" placeholder="STR">
-        <input class="charfield" style="top:212px;left:54px;width:64px;text-align:center;" placeholder="DEX">
-        <input class="charfield" style="top:284px;left:54px;width:64px;text-align:center;" placeholder="CON">
-        <input class="charfield" style="top:356px;left:54px;width:64px;text-align:center;" placeholder="INT">
-        <input class="charfield" style="top:428px;left:54px;width:64px;text-align:center;" placeholder="WIS">
-        <input class="charfield" style="top:500px;left:54px;width:64px;text-align:center;" placeholder="CHA">
+      <!-- Inspiration & Proficiency -->
+      <input style="top:136px; left:122px; width:80px; height:24px;" placeholder="Inspiration">
+      <input style="top:166px; left:122px; width:80px; height:24px;" placeholder="Prof. Bonus">
 
-        <!-- Inspiration/Proficiency -->
-        <input class="charfield" style="top:142px;left:139px;width:100px;" placeholder="Inspiration">
-        <input class="charfield" style="top:172px;left:139px;width:100px;" placeholder="Proficiency Bonus">
+      <!-- Saving Throws (checkboxes + bonus) -->
+      <!-- checkboxes -->
+      <input type="checkbox" style="top:206px; left:132px;">
+      <input type="checkbox" style="top:228px; left:132px;">
+      <input type="checkbox" style="top:250px; left:132px;">
+      <input type="checkbox" style="top:272px; left:132px;">
+      <input type="checkbox" style="top:294px; left:132px;">
+      <input type="checkbox" style="top:316px; left:132px;">
+      <!-- bonus values -->
+      <input style="top:206px; left:152px; width:35px;" maxlength="3">
+      <input style="top:228px; left:152px; width:35px;" maxlength="3">
+      <input style="top:250px; left:152px; width:35px;" maxlength="3">
+      <input style="top:272px; left:152px; width:35px;" maxlength="3">
+      <input style="top:294px; left:152px; width:35px;" maxlength="3">
+      <input style="top:316px; left:152px; width:35px;" maxlength="3">
 
-        <!-- Saving Throws (checkboxes) -->
-        <input type="checkbox" class="charcheckbox" style="top:212px;left:150px;">
-        <input type="checkbox" class="charcheckbox" style="top:229px;left:150px;">
-        <input type="checkbox" class="charcheckbox" style="top:246px;left:150px;">
-        <input type="checkbox" class="charcheckbox" style="top:263px;left:150px;">
-        <input type="checkbox" class="charcheckbox" style="top:280px;left:150px;">
-        <input type="checkbox" class="charcheckbox" style="top:297px;left:150px;">
+      <!-- Skills (checkboxes + bonus) -->
+      <!-- checkboxes -->
+      <input type="checkbox" style="top:350px; left:132px;">
+      <input type="checkbox" style="top:372px; left:132px;">
+      <input type="checkbox" style="top:394px; left:132px;">
+      <input type="checkbox" style="top:416px; left:132px;">
+      <input type="checkbox" style="top:438px; left:132px;">
+      <input type="checkbox" style="top:460px; left:132px;">
+      <input type="checkbox" style="top:482px; left:132px;">
+      <input type="checkbox" style="top:504px; left:132px;">
+      <input type="checkbox" style="top:526px; left:132px;">
+      <input type="checkbox" style="top:548px; left:132px;">
+      <input type="checkbox" style="top:570px; left:132px;">
+      <input type="checkbox" style="top:592px; left:132px;">
+      <input type="checkbox" style="top:614px; left:132px;">
+      <input type="checkbox" style="top:636px; left:132px;">
+      <input type="checkbox" style="top:658px; left:132px;">
+      <input type="checkbox" style="top:680px; left:132px;">
+      <input type="checkbox" style="top:702px; left:132px;">
+      <input type="checkbox" style="top:724px; left:132px;">
+      <!-- bonus values -->
+      <input style="top:350px; left:152px; width:35px;" maxlength="3">
+      <input style="top:372px; left:152px; width:35px;" maxlength="3">
+      <input style="top:394px; left:152px; width:35px;" maxlength="3">
+      <input style="top:416px; left:152px; width:35px;" maxlength="3">
+      <input style="top:438px; left:152px; width:35px;" maxlength="3">
+      <input style="top:460px; left:152px; width:35px;" maxlength="3">
+      <input style="top:482px; left:152px; width:35px;" maxlength="3">
+      <input style="top:504px; left:152px; width:35px;" maxlength="3">
+      <input style="top:526px; left:152px; width:35px;" maxlength="3">
+      <input style="top:548px; left:152px; width:35px;" maxlength="3">
+      <input style="top:570px; left:152px; width:35px;" maxlength="3">
+      <input style="top:592px; left:152px; width:35px;" maxlength="3">
+      <input style="top:614px; left:152px; width:35px;" maxlength="3">
+      <input style="top:636px; left:152px; width:35px;" maxlength="3">
+      <input style="top:658px; left:152px; width:35px;" maxlength="3">
+      <input style="top:680px; left:152px; width:35px;" maxlength="3">
+      <input style="top:702px; left:152px; width:35px;" maxlength="3">
+      <input style="top:724px; left:152px; width:35px;" maxlength="3">
 
-        <!-- Skills (checkboxes) -->
-        <input type="checkbox" class="charcheckbox" style="top:337px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:352px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:367px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:382px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:397px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:412px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:427px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:442px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:457px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:472px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:487px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:502px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:517px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:532px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:547px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:562px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:577px;left:139px;">
-        <input type="checkbox" class="charcheckbox" style="top:592px;left:139px;">
+      <!-- Passive Perception -->
+      <input style="top:750px; left:49px; width:120px; height:24px;" placeholder="Passive Perception">
 
-        <!-- Passive Perception -->
-        <input class="charfield" style="top:609px;left:54px;width:185px;" placeholder="Passive Wisdom (Perception)">
-        <!-- Other Proficiencies & Languages -->
-        <textarea class="chartextarea" style="top:647px;left:54px;width:185px;height:60px;" placeholder="Other Proficiencies & Languages"></textarea>
+      <!-- Other Proficiencies -->
+      <textarea style="top:790px; left:49px; width:210px; height:72px;" placeholder="Other Proficiencies & Languages"></textarea>
 
-        <!-- Center: AC, Initiative, Speed -->
-        <input class="charfield" style="top:140px;left:263px;width:56px;text-align:center;" placeholder="AC">
-        <input class="charfield" style="top:140px;left:341px;width:56px;text-align:center;" placeholder="Initiative">
-        <input class="charfield" style="top:140px;left:419px;width:56px;text-align:center;" placeholder="Speed">
+      <!-- AC, Initiative, Speed -->
+      <input style="top:135px; left:262px; width:62px; height:52px; text-align:center; font-size:28px;" maxlength="2" placeholder="AC">
+      <input style="top:135px; left:338px; width:62px; height:52px; text-align:center; font-size:28px;" maxlength="2" placeholder="Init">
+      <input style="top:135px; left:414px; width:62px; height:52px; text-align:center; font-size:28px;" maxlength="2" placeholder="Speed">
 
-        <!-- Current Hit Points -->
-        <input class="charfield" style="top:207px;left:263px;width:212px;" placeholder="Hit Point Maximum">
-        <textarea class="chartextarea" style="top:234px;left:263px;width:212px;height:44px;" placeholder="Current Hit Points"></textarea>
-        <!-- Temporary Hit Points -->
-        <input class="charfield" style="top:286px;left:263px;width:212px;" placeholder="Temporary Hit Points">
+      <!-- HP -->
+      <input style="top:210px; left:262px; width:214px; height:26px;" placeholder="HP Max">
+      <textarea style="top:243px; left:262px; width:214px; height:36px;" placeholder="Current Hit Points"></textarea>
+      <input style="top:287px; left:262px; width:214px; height:26px;" placeholder="Temp HP">
 
-        <!-- Hit Dice & Death Saves -->
-        <input class="charfield" style="top:325px;left:263px;width:70px;" placeholder="Hit Dice">
-        <!-- Death Saves: checkboxes for Successes & Failures -->
-        <input type="checkbox" class="charcheckbox" style="top:335px;left:355px;">
-        <input type="checkbox" class="charcheckbox" style="top:335px;left:375px;">
-        <input type="checkbox" class="charcheckbox" style="top:335px;left:395px;">
-        <input type="checkbox" class="charcheckbox" style="top:335px;left:440px;">
-        <input type="checkbox" class="charcheckbox" style="top:335px;left:460px;">
-        <input type="checkbox" class="charcheckbox" style="top:335px;left:480px;">
+      <!-- Hit Dice & Death Saves -->
+      <input style="top:325px; left:262px; width:80px; height:26px;" placeholder="Hit Dice">
+      <input type="checkbox" style="top:370px; left:355px;">
+      <input type="checkbox" style="top:370px; left:375px;">
+      <input type="checkbox" style="top:370px; left:395px;">
+      <input type="checkbox" style="top:370px; left:440px;">
+      <input type="checkbox" style="top:370px; left:460px;">
+      <input type="checkbox" style="top:370px; left:480px;">
 
-        <!-- Attacks & Spellcasting -->
-        <textarea class="chartextarea" style="top:370px;left:263px;width:212px;height:62px;" placeholder="Attacks & Spellcasting"></textarea>
+      <!-- Attacks & Spellcasting -->
+      <textarea style="top:410px; left:262px; width:214px; height:84px;" placeholder="Attacks & Spellcasting"></textarea>
 
-        <!-- Equipment -->
-        <textarea class="chartextarea" style="top:445px;left:263px;width:212px;height:77px;" placeholder="Equipment"></textarea>
+      <!-- Equipment -->
+      <textarea style="top:510px; left:262px; width:214px; height:108px;" placeholder="Equipment"></textarea>
 
-        <!-- Right Column: Personality, Ideals, Bonds, Flaws -->
-        <textarea class="chartextarea" style="top:140px;left:505px;width:200px;height:48px;" placeholder="Personality Traits"></textarea>
-        <textarea class="chartextarea" style="top:202px;left:505px;width:200px;height:48px;" placeholder="Ideals"></textarea>
-        <textarea class="chartextarea" style="top:264px;left:505px;width:200px;height:48px;" placeholder="Bonds"></textarea>
-        <textarea class="chartextarea" style="top:326px;left:505px;width:200px;height:48px;" placeholder="Flaws"></textarea>
-        <!-- Features & Traits -->
-        <textarea class="chartextarea" style="top:390px;left:505px;width:200px;height:132px;" placeholder="Features & Traits"></textarea>
-      </div>
-    </div>
-
-    <!-- PAGE 2 -->
-    <div class="sheet-img-container" style="height:994px;">
-      <img src="images/5E_CharacterSheet_Fillable-2.png" alt="Character Sheet Page 2" class="sheet-img">
-      <div class="sheet-fields">
-        <!-- Character Name -->
-        <input class="charfield" style="top:56px;left:72px;width:263px;" placeholder="Character Name">
-
-        <!-- Age, Height, Weight, Eyes, Skin, Hair -->
-        <input class="charfield" style="top:53px;left:442px;width:60px;" placeholder="Age">
-        <input class="charfield" style="top:53px;left:505px;width:60px;" placeholder="Height">
-        <input class="charfield" style="top:53px;left:568px;width:60px;" placeholder="Weight">
-        <input class="charfield" style="top:77px;left:442px;width:60px;" placeholder="Eyes">
-        <input class="charfield" style="top:77px;left:505px;width:60px;" placeholder="Skin">
-        <input class="charfield" style="top:77px;left:568px;width:60px;" placeholder="Hair">
-
-        <!-- Character Appearance -->
-        <textarea class="chartextarea" style="top:134px;left:36px;width:250px;height:200px;" placeholder="Character Appearance"></textarea>
-
-        <!-- Allies & Organizations -->
-        <textarea class="chartextarea" style="top:134px;left:308px;width:210px;height:200px;" placeholder="Allies & Organizations"></textarea>
-        <!-- Symbol sub-box inside Allies & Organizations -->
-        <textarea class="chartextarea" style="top:146px;left:444px;width:66px;height:60px;font-size:0.9em;" placeholder="Symbol"></textarea>
-
-        <!-- Character Backstory -->
-        <textarea class="chartextarea" style="top:355px;left:36px;width:250px;height:185px;" placeholder="Character Backstory"></textarea>
-
-        <!-- Additional Features & Traits -->
-        <textarea class="chartextarea" style="top:355px;left:308px;width:210px;height:94px;" placeholder="Additional Features & Traits"></textarea>
-
-        <!-- Treasure -->
-        <textarea class="chartextarea" style="top:461px;left:308px;width:210px;height:78px;" placeholder="Treasure"></textarea>
-      </div>
-    </div>
-
-    <!-- PAGE 3 -->
-    <div class="sheet-img-container" style="height:994px;">
-      <img src="images/5E_CharacterSheet_Fillable-3.png" alt="Character Sheet Page 3" class="sheet-img">
-      <div class="sheet-fields">
-        <!-- Spellcasting Class -->
-        <input class="charfield" style="top:56px;left:72px;width:140px;" placeholder="Spellcasting Class">
-        <input class="charfield" style="top:56px;left:251px;width:95px;" placeholder="Spellcasting Ability">
-        <input class="charfield" style="top:56px;left:355px;width:95px;" placeholder="Spell Save DC">
-        <input class="charfield" style="top:56px;left:459px;width:95px;" placeholder="Spell Attack Bonus">
-
-        <!-- Cantrips -->
-        <textarea class="chartextarea" style="top:110px;left:36px;width:170px;height:90px;" placeholder="Cantrips"></textarea>
-        <!-- Levels 1-9 -->
-        <!-- Level 1 -->
-        <input class="charfield" style="top:219px;left:64px;width:36px;" placeholder="Slots Total">
-        <input class="charfield" style="top:219px;left:108px;width:36px;" placeholder="Expended">
-        <textarea class="chartextarea" style="top:243px;left:36px;width:170px;height:64px;" placeholder="Level 1 Spells"></textarea>
-        <!-- Level 2 -->
-        <textarea class="chartextarea" style="top:316px;left:36px;width:170px;height:64px;" placeholder="Level 2 Spells"></textarea>
-        <!-- Level 3 -->
-        <textarea class="chartextarea" style="top:389px;left:36px;width:170px;height:64px;" placeholder="Level 3 Spells"></textarea>
-        <!-- Level 4 -->
-        <textarea class="chartextarea" style="top:462px;left:36px;width:170px;height:64px;" placeholder="Level 4 Spells"></textarea>
-        <!-- Level 5 -->
-        <textarea class="chartextarea" style="top:535px;left:36px;width:170px;height:64px;" placeholder="Level 5 Spells"></textarea>
-        <!-- Level 6 -->
-        <textarea class="chartextarea" style="top:608px;left:36px;width:170px;height:64px;" placeholder="Level 6 Spells"></textarea>
-        <!-- Level 7 -->
-        <textarea class="chartextarea" style="top:681px;left:36px;width:170px;height:64px;" placeholder="Level 7 Spells"></textarea>
-        <!-- Level 8 -->
-        <textarea class="chartextarea" style="top:754px;left:36px;width:170px;height:64px;" placeholder="Level 8 Spells"></textarea>
-        <!-- Level 9 -->
-        <textarea class="chartextarea" style="top:827px;left:36px;width:170px;height:64px;" placeholder="Level 9 Spells"></textarea>
-        <!-- Repeat for each spell level column as desired (or add more as needed for your layout) -->
-      </div>
-    </div>
+      <!-- Personality, Ideals, Bonds, Flaws -->
+      <textarea style="top:135px; left:500px; width:222px; height:58px;" placeholder="Personality Traits"></textarea>
+      <textarea style="top:200px; left:500px; width:222px; height:58px;" placeholder="Ideals"></textarea>
+      <textarea style="top:265px; left:500px; width:222px; height:58px;" placeholder="Bonds"></textarea>
+      <textarea style="top:330px; left:500px; width:222px; height:58px;" placeholder="Flaws"></textarea>
+      <textarea style="top:395px; left:500px; width:222px; height:220px;" placeholder="Features & Traits"></textarea>
+    </form>
   </div>
 </body>
 </html>
