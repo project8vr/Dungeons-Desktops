@@ -1,33 +1,118 @@
-<!-- character.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Character Sheet</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D&D Character Sheet</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f8f8f8;
+      padding: 2rem;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    textarea {
+      height: 100px;
+    }
+  </style>
 </head>
 <body>
-  <div id="sheet">
-    <h1>Character Sheet</h1>
-    <label>
-      Name: <input type="text" id="charName" />
-    </label>
-    <label>
-      Race: <input type="text" id="charRace" />
-    </label>
-    <label>
-      Class: <input type="text" id="charClass" />
-    </label>
-    <label>
-      Strength: <input type="number" id="charStr" />
-    </label>
-    <!-- Add more stats as needed -->
+  <h1>D&D Character Sheet</h1>
 
-    <p id="status">Saving...</p>
+  <div class="section">
+    <h2>Basic Info</h2>
+    <label>Name <input id="charName"></label>
+    <label>Class <input id="charClass"></label>
+    <label>Background <input id="charBackground"></label>
+    <label>Race <input id="charRace"></label>
+    <label>Alignment <input id="charAlignment"></label>
+    <label>Level <input id="charLevel" type="number"></label>
   </div>
 
-  <script src="script.js"></script>
+  <div class="section">
+    <h2>Ability Scores</h2>
+    <label>Strength <input id="str"></label>
+    <label>Dexterity <input id="dex"></label>
+    <label>Constitution <input id="con"></label>
+    <label>Intelligence <input id="int"></label>
+    <label>Wisdom <input id="wis"></label>
+    <label>Charisma <input id="cha"></label>
+  </div>
+
+  <div class="section">
+    <h2>Combat Stats</h2>
+    <label>Armor Class <input id="ac"></label>
+    <label>Initiative <input id="initiative"></label>
+    <label>Speed <input id="speed"></label>
+    <label>Max HP <input id="maxHP"></label>
+    <label>Current HP <input id="currentHP"></label>
+    <label>Temporary HP <input id="tempHP"></label>
+    <label>Hit Dice <input id="hitDice"></label>
+  </div>
+
+  <div class="section">
+    <h2>Saving Throws</h2>
+    <label>Strength Save <input id="saveStr"></label>
+    <label>Dexterity Save <input id="saveDex"></label>
+    <label>Constitution Save <input id="saveCon"></label>
+    <label>Intelligence Save <input id="saveInt"></label>
+    <label>Wisdom Save <input id="saveWis"></label>
+    <label>Charisma Save <input id="saveCha"></label>
+  </div>
+
+  <div class="section">
+    <h2>Skills</h2>
+    <label>Acrobatics <input id="skillAcrobatics"></label>
+    <label>Animal Handling <input id="skillAnimalHandling"></label>
+    <label>Arcana <input id="skillArcana"></label>
+    <label>Athletics <input id="skillAthletics"></label>
+    <label>Deception <input id="skillDeception"></label>
+    <label>History <input id="skillHistory"></label>
+    <label>Insight <input id="skillInsight"></label>
+    <label>Intimidation <input id="skillIntimidation"></label>
+    <label>Investigation <input id="skillInvestigation"></label>
+    <label>Medicine <input id="skillMedicine"></label>
+    <label>Nature <input id="skillNature"></label>
+    <label>Perception <input id="skillPerception"></label>
+    <label>Performance <input id="skillPerformance"></label>
+    <label>Persuasion <input id="skillPersuasion"></label>
+    <label>Religion <input id="skillReligion"></label>
+    <label>Sleight of Hand <input id="skillSleight"></label>
+    <label>Stealth <input id="skillStealth"></label>
+    <label>Survival <input id="skillSurvival"></label>
+  </div>
+
+  <div class="section">
+    <h2>Features & Traits</h2>
+    <textarea id="features"></textarea>
+  </div>
+
+  <div class="section">
+    <h2>Attacks & Spellcasting</h2>
+    <textarea id="attacks"></textarea>
+  </div>
+
+  <div class="section">
+    <h2>Other Proficiencies & Languages</h2>
+    <textarea id="proficiencies"></textarea>
+  </div>
+
+  <div class="section">
+    <h2>Inventory</h2>
+    <textarea id="inventory"></textarea>
+  </div>
 </body>
 </html>
+
 
