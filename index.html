@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>D&D 5e Character Sheet (HTML Editable)</title>
+  <title>D&D 5e Character Sheet (HTML Editable, Full Fields)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     :root {
@@ -22,8 +22,8 @@
       min-height: 100%;
     }
     .sheet-container {
-      max-width: 900px;
-      margin: 16px auto;
+      max-width: 1000px;
+      margin: 10px auto 50px auto;
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 4px 32px #0002;
@@ -68,7 +68,7 @@
       background: var(--section-bg);
       border: 1.5px solid var(--accent);
       border-radius: 7px;
-      width: 110px;
+      width: 120px;
       text-align: center;
       padding: 10px 6px 12px 6px;
       margin-bottom: 4px;
@@ -86,16 +86,69 @@
       font-size: 1.4em;
       font-weight: bold;
       text-align: center;
-      width: 50px;
+      width: 55px;
       margin: 0 auto 4px auto;
       display: block;
     }
-    .ability-score .mod {
+    .ability-score .mod-label {
       font-size: 1.1em;
-      margin-bottom: 2px;
       color: #444;
       font-weight: 500;
       display: block;
+      margin: 4px 0 2px 0;
+    }
+    .ability-score .mod-box {
+      display: flex;
+      justify-content: center;
+    }
+    .ability-score .mod-box input[type="number"] {
+      width: 48px;
+      height: 36px;
+      font-size: 1.4em;
+      font-weight: bold;
+      text-align: center;
+      margin: 0 auto;
+      border: 1.5px solid #bbb;
+      border-radius: 4px;
+      background: #fff;
+    }
+    .main-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+    .stats-block {
+      background: var(--section-bg);
+      border: 1px solid var(--accent);
+      border-radius: 7px;
+      padding: 14px 10px 8px 10px;
+      min-width: 160px;
+      flex: 1 1 160px;
+      margin-bottom: 4px;
+      box-shadow: 0 2px 12px #0001;
+    }
+    .stats-block label {
+      font-size: 1em;
+      font-weight: 600;
+      color: var(--label);
+    }
+    .stats-block input[type="number"], 
+    .stats-block input[type="text"] {
+      font-size: 1.1em;
+      width: 48px;
+      margin: 0 6px 0 0;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      padding: 3px 7px;
+      text-align: center;
+      background: #fff;
+    }
+    .block-row {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
     }
     .skills-section {
       background: var(--section-bg);
@@ -144,9 +197,106 @@
       height: 16px;
       margin-right: 3px;
     }
-    @media (max-width: 700px) {
+    /* Personality, Features, and Equipment Sections */
+    .large-section {
+      margin-bottom: 18px;
+      background: var(--section-bg);
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      padding: 10px 14px;
+    }
+    .large-section label {
+      color: var(--label);
+      font-weight: 600;
+    }
+    .large-section textarea {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #bbb;
+      background: #faf6f1;
+      font-size: 1em;
+      margin-bottom: 6px;
+      min-height: 52px;
+    }
+    /* Attacks and Spellcasting */
+    .attacks-section {
+      margin-bottom: 18px;
+      background: var(--section-bg);
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      padding: 10px 14px;
+    }
+    .attacks-section table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #f7f4e6;
+      margin-bottom: 6px;
+    }
+    .attacks-section th, .attacks-section td {
+      border: 1px solid #b9b0a3;
+      padding: 4px 8px;
+      text-align: left;
+      font-size: 1em;
+    }
+    /* Death Saves */
+    .death-saves-block {
+      background: var(--section-bg);
+      border: 1px solid var(--accent);
+      border-radius: 7px;
+      padding: 9px 12px;
+      min-width: 150px;
+      margin-bottom: 12px;
+      margin-top: 6px;
+      text-align: center;
+    }
+    .death-saves-block label {
+      font-size: 1em;
+      color: var(--label);
+      font-weight: 600;
+    }
+    .death-saves-row {
+      margin: 4px 0 6px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .death-saves-row span {
+      font-size: 0.97em;
+    }
+    .death-saves-row input[type="checkbox"] {
+      transform: scale(1.2);
+      margin: 0 2px;
+    }
+    /* Spellcasting */
+    .spells-section {
+      margin-bottom: 18px;
+      background: var(--section-bg);
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      padding: 10px 14px;
+    }
+    .spells-section h2 {
+      color: var(--label);
+      margin: 0 0 6px 0;
+      font-size: 1.08em;
+    }
+    .spells-level {
+      margin-bottom: 8px;
+    }
+    .spells-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .spells-list input[type="text"] {
+      width: 100%;
+      margin-bottom: 3px;
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
       .sheet-container {
-        padding: 5vw 2vw;
+        padding: 3vw 2vw;
       }
       .sheet-header {
         gap: 8px 0;
@@ -154,14 +304,28 @@
       .abilities-section {
         gap: 6px;
       }
-      .skills-section {
-        padding: 8px 4vw;
+      .skills-section,
+      .attacks-section,
+      .large-section,
+      .spells-section {
+        padding: 8px 2vw;
+      }
+    }
+    @media (max-width: 600px) {
+      .abilities-section {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .main-stats-row {
+        flex-direction: column;
+        gap: 8px;
       }
     }
   </style>
 </head>
 <body>
   <form class="sheet-container" autocomplete="off">
+    <!-- Header -->
     <div class="sheet-header">
       <div class="field-group">
         <label for="charname">Character Name</label>
@@ -193,42 +357,147 @@
       </div>
     </div>
 
+    <!-- Ability Scores -->
     <div class="abilities-section">
       <div class="ability-score">
         <label for="str">Strength</label>
         <input id="str" name="str" type="number" min="1" max="30" />
-        <span class="mod">Mod: <input type="number" name="strmod" style="width:32px;" /></span>
+        <span class="mod-label">Mod:</span>
+        <div class="mod-box">
+          <input type="number" name="strmod" min="-5" max="10" />
+        </div>
       </div>
       <div class="ability-score">
         <label for="dex">Dexterity</label>
         <input id="dex" name="dex" type="number" min="1" max="30" />
-        <span class="mod">Mod: <input type="number" name="dexmod" style="width:32px;" /></span>
+        <span class="mod-label">Mod:</span>
+        <div class="mod-box">
+          <input type="number" name="dexmod" min="-5" max="10" />
+        </div>
       </div>
       <div class="ability-score">
         <label for="con">Constitution</label>
         <input id="con" name="con" type="number" min="1" max="30" />
-        <span class="mod">Mod: <input type="number" name="conmod" style="width:32px;" /></span>
+        <span class="mod-label">Mod:</span>
+        <div class="mod-box">
+          <input type="number" name="conmod" min="-5" max="10" />
+        </div>
       </div>
       <div class="ability-score">
         <label for="int">Intelligence</label>
         <input id="int" name="int" type="number" min="1" max="30" />
-        <span class="mod">Mod: <input type="number" name="intmod" style="width:32px;" /></span>
+        <span class="mod-label">Mod:</span>
+        <div class="mod-box">
+          <input type="number" name="intmod" min="-5" max="10" />
+        </div>
       </div>
       <div class="ability-score">
         <label for="wis">Wisdom</label>
         <input id="wis" name="wis" type="number" min="1" max="30" />
-        <span class="mod">Mod: <input type="number" name="wismod" style="width:32px;" /></span>
+        <span class="mod-label">Mod:</span>
+        <div class="mod-box">
+          <input type="number" name="wismod" min="-5" max="10" />
+        </div>
       </div>
       <div class="ability-score">
         <label for="cha">Charisma</label>
         <input id="cha" name="cha" type="number" min="1" max="30" />
-        <span class="mod">Mod: <input type="number" name="chamod" style="width:32px;" /></span>
+        <span class="mod-label">Mod:</span>
+        <div class="mod-box">
+          <input type="number" name="chamod" min="-5" max="10" />
+        </div>
       </div>
     </div>
 
+    <!-- Main Stats Row (AC, Initiative, Speed, HP, Hit Dice, Death Saves) -->
+    <div class="main-stats-row">
+      <div class="stats-block">
+        <label for="proficiency">Proficiency Bonus</label>
+        <input id="proficiency" name="proficiency" type="number" min="1" max="10" />
+        <div class="block-row">
+          <label for="ac">AC</label>
+          <input id="ac" name="ac" type="number" min="1" max="99" />
+        </div>
+        <div class="block-row">
+          <label for="initiative">Initiative</label>
+          <input id="initiative" name="initiative" type="number" min="-10" max="99" />
+        </div>
+        <div class="block-row">
+          <label for="speed">Speed</label>
+          <input id="speed" name="speed" type="number" min="0" max="200" />
+        </div>
+      </div>
+      <div class="stats-block">
+        <label for="maxhp">Max HP</label>
+        <input id="maxhp" name="maxhp" type="number" min="1" max="999" />
+        <div class="block-row">
+          <label for="currenthp">Current HP</label>
+          <input id="currenthp" name="currenthp" type="number" min="0" max="999" />
+        </div>
+        <div class="block-row">
+          <label for="temphp">Temp HP</label>
+          <input id="temphp" name="temphp" type="number" min="0" max="999" />
+        </div>
+      </div>
+      <div class="stats-block">
+        <label for="hitdice">Hit Dice</label>
+        <input id="hitdice" name="hitdice" type="text" maxlength="12" />
+        <div class="block-row">
+          <label for="deathsuccess">Death Saves</label>
+        </div>
+        <div class="death-saves-block">
+          <div class="death-saves-row">
+            <span>Successes</span>
+            <input type="checkbox" name="deathsuccess1">
+            <input type="checkbox" name="deathsuccess2">
+            <input type="checkbox" name="deathsuccess3">
+          </div>
+          <div class="death-saves-row">
+            <span>Failures</span>
+            <input type="checkbox" name="deathfail1">
+            <input type="checkbox" name="deathfail2">
+            <input type="checkbox" name="deathfail3">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Saving Throws and Skills -->
     <div class="skills-section">
-      <h2>Skills</h2>
+      <h2>Saving Throws & Skills</h2>
       <div class="skills-list">
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="strsave_prof" />
+          <label for="strsave_prof">Strength Save</label>
+          <input type="number" step="1" name="strsave" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="dexsave_prof" />
+          <label for="dexsave_prof">Dexterity Save</label>
+          <input type="number" step="1" name="dexsave" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="consave_prof" />
+          <label for="consave_prof">Constitution Save</label>
+          <input type="number" step="1" name="consave" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="intsave_prof" />
+          <label for="intsave_prof">Intelligence Save</label>
+          <input type="number" step="1" name="intsave" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="wissave_prof" />
+          <label for="wissave_prof">Wisdom Save</label>
+          <input type="number" step="1" name="wissave" />
+        </div>
+        <div class="skill-row">
+          <input class="proficiency" type="checkbox" id="chasave_prof" />
+          <label for="chasave_prof">Charisma Save</label>
+          <input type="number" step="1" name="chasave" />
+        </div>
+        <hr>
+        <!-- Skills -->
         <div class="skill-row">
           <input class="proficiency" type="checkbox" id="acrobatics_prof" />
           <label for="acrobatics_prof">Acrobatics (Dex)</label>
@@ -322,16 +591,117 @@
       </div>
     </div>
 
-    <div style="margin-bottom:18px;">
-      <label for="features" style="color:var(--label); font-weight:600;">Features & Traits</label>
-      <textarea id="features" name="features" rows="5" style="width:100%;border-radius:6px;border:1px solid #bbb;background:#faf6f1;"></textarea>
+    <!-- Attacks and Spellcasting -->
+    <div class="attacks-section">
+      <label>Attacks & Spellcasting</label>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Atk Bonus</th>
+            <th>Damage/Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" name="attack1" /></td>
+            <td><input type="text" name="attack1_bonus" /></td>
+            <td><input type="text" name="attack1_damage" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="attack2" /></td>
+            <td><input type="text" name="attack2_bonus" /></td>
+            <td><input type="text" name="attack2_damage" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="attack3" /></td>
+            <td><input type="text" name="attack3_bonus" /></td>
+            <td><input type="text" name="attack3_damage" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <textarea rows="2" placeholder="Extra attacks or spellcasting notes"></textarea>
     </div>
-    <div>
-      <label for="equipment" style="color:var(--label); font-weight:600;">Equipment</label>
-      <textarea id="equipment" name="equipment" rows="5" style="width:100%;border-radius:6px;border:1px solid #bbb;background:#faf6f1;"></textarea>
+
+    <!-- Equipment -->
+    <div class="large-section">
+      <label for="equipment">Equipment</label>
+      <textarea id="equipment" name="equipment" rows="4"></textarea>
     </div>
+
+    <!-- Features & Traits -->
+    <div class="large-section">
+      <label for="features">Features & Traits</label>
+      <textarea id="features" name="features" rows="4"></textarea>
+    </div>
+
+    <!-- Personality Traits, Ideals, Bonds, Flaws -->
+    <div class="main-stats-row">
+      <div class="large-section" style="flex:1 1 220px;">
+        <label for="personality">Personality Traits</label>
+        <textarea id="personality" name="personality" rows="2"></textarea>
+      </div>
+      <div class="large-section" style="flex:1 1 220px;">
+        <label for="ideals">Ideals</label>
+        <textarea id="ideals" name="ideals" rows="2"></textarea>
+      </div>
+      <div class="large-section" style="flex:1 1 220px;">
+        <label for="bonds">Bonds</label>
+        <textarea id="bonds" name="bonds" rows="2"></textarea>
+      </div>
+      <div class="large-section" style="flex:1 1 220px;">
+        <label for="flaws">Flaws</label>
+        <textarea id="flaws" name="flaws" rows="2"></textarea>
+      </div>
+    </div>
+
+    <!-- Spellcasting (basic) -->
+    <div class="spells-section">
+      <h2>Spellcasting</h2>
+      <div class="spells-level">
+        <label>Spellcasting Ability</label>
+        <input type="text" name="spell_ability" style="width:120px;">
+        <label style="margin-left:18px;">Spell Save DC</label>
+        <input type="number" name="spell_dc" style="width:60px;">
+        <label style="margin-left:18px;">Spell Attack Bonus</label>
+        <input type="number" name="spell_bonus" style="width:60px;">
+      </div>
+      <div class="spells-level">
+        <label>Cantrips</label>
+        <div class="spells-list">
+          <input type="text" name="cantrip1" placeholder="Cantrip 1">
+          <input type="text" name="cantrip2" placeholder="Cantrip 2">
+          <input type="text" name="cantrip3" placeholder="Cantrip 3">
+        </div>
+      </div>
+      <div class="spells-level">
+        <label>Level 1 Spells</label>
+        <div class="spells-list">
+          <input type="text" name="spell1_1" placeholder="Spell 1">
+          <input type="text" name="spell1_2" placeholder="Spell 2">
+          <input type="text" name="spell1_3" placeholder="Spell 3">
+        </div>
+      </div>
+      <!-- Add more spell levels as needed -->
+      <div class="spells-level">
+        <label>Higher Level Spells</label>
+        <div class="spells-list">
+          <input type="text" name="spell2_1" placeholder="Spell 1">
+          <input type="text" name="spell3_1" placeholder="Spell 2">
+          <input type="text" name="spell4_1" placeholder="Spell 3">
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes / Misc -->
+    <div class="large-section">
+      <label for="othernotes">Other Notes</label>
+      <textarea id="othernotes" name="othernotes" rows="3"></textarea>
+    </div>
+
     <p style="margin-top:32px;color:#999;font-size:0.93em;">
-      Basic D&D 5e HTML character sheet. Ask for more sections (like HP, spells, attacks, etc.) or features (save, print, etc.)!
+      Full D&D 5e HTML character sheet. <br>
+      Ask for more sections (spells by level, currency, backgrounds, etc.), save/load, or styling tweaks!
     </p>
   </form>
 </body>
